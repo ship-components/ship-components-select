@@ -70,6 +70,9 @@ export default class Select extends React.Component {
     this.setState({
       active: false
     }, () => {
+      if (this.props.disabled === true) {
+        return;
+      }
       let el = ReactDOM.findDOMNode(this.refs.input);
       el.value = value;
       dispatch(el, this.props.onChange);
@@ -134,6 +137,7 @@ export default class Select extends React.Component {
       'select',
       cssClassNames.container,
       {
+        [cssClassNames.disabled]: this.props.disabled,
         [cssClassNames.active]: this.state.active
       }
     );
