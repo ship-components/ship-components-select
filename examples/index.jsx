@@ -32,9 +32,8 @@ class Examples extends React.Component {
       {
         value: '3',
         label: 'Three'
-      }
-      ]
-    }
+      }]
+    };
 
     return (
       <div>
@@ -46,17 +45,13 @@ class Examples extends React.Component {
             options={opts.str}
             iconPrefix='ion-'
             icon='chevron-down'
-            onChange={this.handleChange.bind(this, 'example1')}
-          />
+            onChange={this.handleChange.bind(this, 'example1')} />
           <code>
             {`<Select
               onChange={this.handleChange}
               defaultValue="One"
               options={["One", "Two", "Three"]} />`}
           </code>
-        </div>
-        <div className='example-group'>
-          <h2>{'Array<Object>'}</h2>
           <Select
             defaultValue={this.state.example2 || opts.obj[0].value}
             options={opts.obj}
@@ -67,7 +62,50 @@ class Examples extends React.Component {
           <code>
             {`<Select
               onChange={this.handleChange}
-              defaultValue="One"
+              defaultValue="1"
+              options={[
+                  {
+                    value: '1',
+                    label: 'One'
+                  }, {
+                    value: '2',
+                    label: 'Two'
+                  }, {
+                    value: '3',
+                    label: 'Three'
+                  }
+              ]} />`}
+          </code>
+        </div>
+        <div className='example-group'>
+          <h2>With Label</h2>
+          <Select
+            label='Select...'
+            defaultValue={this.state.example3}
+            options={opts.str}
+            iconPrefix='ion-'
+            icon='chevron-down'
+            onChange={this.handleChange.bind(this, 'example3')} />
+          <code>
+            {`<Select
+              label="Select..."
+              onChange={this.handleChange}
+              options={["One", "Two", "Three"]} />`}
+          </code>
+        </div>
+        <div className='example-group'>
+          <h2>Disabled</h2>
+          <Select
+            disabled
+            defaultValue={this.state.example4 || opts.str[0]}
+            options={opts.str}
+            iconPrefix='ion-'
+            icon='chevron-down'
+            onChange={this.handleChange.bind(this, 'example4')} />
+          <code>
+            {`<Select
+              disabled
+              onChange={this.handleChange}
               options={["One", "Two", "Three"]} />`}
           </code>
         </div>
