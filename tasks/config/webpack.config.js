@@ -59,8 +59,13 @@ module.exports = {
   postcss: [
     require('postcss-nested'),
     require('postcss-simple-vars')({
+      /**
+       * Default variables. Should be overridden in mail build system
+       * @type {Object}
+       */
       variables: {
-        'primary-color' : 'red',
+        'primary-color' : '#38b889',
+        'opacity-disabled': '0.58',
         'base-grid-size' : '4px'
       }
     }),
