@@ -2,7 +2,7 @@
   "name": "react-select",
   "version": "0.1.0",
   "description": "Material Design React Select Box",
-  "main": "src/index.js",
+  "main": "src/Select.jsx",
   "scripts": {
     "start": "grunt server",
     "build": "grunt build",
