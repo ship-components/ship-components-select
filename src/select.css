@@ -55,7 +55,7 @@
 }
 
 .item {
-  padding: calc($base-grid-size * 3) calc($base-grid-size * 6);
+  padding: calc($base-grid-size * 2) calc($base-grid-size * 6);
   white-space: nowrap;
   cursor: pointer;
   overflow: hidden;
