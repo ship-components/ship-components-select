@@ -155,7 +155,7 @@ export default class Select extends React.Component {
           className={'select--control ' + cssClassNames.control}
           onClick={this.toggleActive.bind(this)}>
             <div className={'select--value ' + cssClassNames.value}>{value.render || value.label}</div>
-            <div className={'select--value-icon ' + this.props.iconPrefix + this.props.icon + ' ' + cssClassNames.icon} />
+            <div className={'select--value-icon ' + this.props.iconClass + ' ' + cssClassNames.icon} />
         </HighlightClick>
         <ReactCSSTransitionGroup
           className={classNames('select--list', cssClassNames.list)}
@@ -194,8 +194,7 @@ export default class Select extends React.Component {
 }
 
 Select.defaultProps = {
-  icon: 'keyboard_arrow_down',
-  iconPrefix: 'icon-',
+  iconClass: 'icon-keyboard_arrow_down',
   label: '',
   disabled: false,
   defaultValue: '',
