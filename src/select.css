@@ -6,7 +6,7 @@
 .icon {
   height: calc($base-grid-size * 8px - 2px);
   width: calc($base-grid-size * 8px - 2px);
-  line-height: calc($base-grid-size * 8px - 2px) !imporant;
+  line-height: calc($base-grid-size * 8px - 2px) !important;
   text-align: center;
   font-size: 30px;
   &:before {
