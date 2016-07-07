@@ -1,5 +1,5 @@
 {
-  "name": "react-select",
+  "name": "ship-components-select-box",
   "version": "0.1.0",
   "description": "Material Design React Select Box",
   "main": "src/Select.jsx",
