@@ -134,6 +134,7 @@ export default class Select extends React.Component {
     // css class names
     const containerClasses = classNames(
       'select',
+      this.props.className,
       cssClassNames.container,
       {
         [cssClassNames.disabled]: this.props.disabled,
