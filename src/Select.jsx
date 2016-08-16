@@ -10,7 +10,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
-import lodash from 'lodash';
 
 import SelectOption from './SelectOption';
 import OutsideClick from 'react-outsideclick';
@@ -33,7 +32,7 @@ export default class Select extends React.Component {
   }
 
   getDefaultValue(props = this.props) {
-    if(lodash.isObject(props.defaultValue)) {
+    if (typeof props.defaultValue === 'object') {
       return props.defaultValue;
     } else {
       return {
@@ -98,7 +97,7 @@ export default class Select extends React.Component {
     let opts = this.props.options;
 
     // Ensure we always deal with an array of objects
-    if (lodash.isString(this.props.options[0])) {
+    if (typeof this.props.options[0] === 'string') {
       opts = this.props.options.map((opt)=>{
         return {
           label: opt,
@@ -123,7 +122,7 @@ export default class Select extends React.Component {
     const defaultValue = this.getDefaultValue();
 
     // Check to see if the defaultValue is in the option list
-    let value = lodash.find(opts, (opt) => opt.value === defaultValue.value);
+    let value = opts.find(opt => opt.value === defaultValue.value);
 
     if (!value) {
       value = {
