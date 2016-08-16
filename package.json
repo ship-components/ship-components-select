@@ -13,7 +13,9 @@
     "url": "git+https://github.com/ship-components/ship-components-select.git"
   },
   "keywords": [
-    "react"
+    "react",
+    "select",
+    "es2015"
   ],
   "author": "Isaac Suttell <isaac@isaacsuttell.com>",
   "license": "MIT",
