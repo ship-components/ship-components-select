@@ -182,7 +182,7 @@ export default class Select extends React.Component {
           ref='input'
           readOnly
           value={this.props.defaultValue}
-          style={{'display' : 'none'}}>
+          style={{display : 'none'}}>
          {opts.map((option) => {
            return (
              <SelectOption
