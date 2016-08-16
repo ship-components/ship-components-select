@@ -156,7 +156,9 @@ export default class Select extends React.Component {
           onClick={this.toggleActive.bind(this)}>
             <div className={'select--value ' + cssClassNames.value}>{value.render || value.label}</div>
             {this.props.icon !== null ?
-              this.props.icon
+              React.cloneElement(this.props.icon, {
+                className: this.props.icon.props.className + ' select--value-icon ' + cssClassNames.icon
+              })
             :
               <div className={'select--value-icon ' + this.props.iconClass + ' ' + cssClassNames.icon} />
             }
@@ -197,6 +199,10 @@ export default class Select extends React.Component {
   }
 }
 
+/**
+ * Defaults
+ * @type {Object}
+ */
 Select.defaultProps = {
   iconClass: 'icon-keyboard_arrow_down',
   icon: null,
@@ -208,3 +214,20 @@ Select.defaultProps = {
   options: [],
   onChange: function() {}
 };
+
+/**
+ * Type checking
+ * @type {Object}
+ */
+Select.propTypes = {
+  className: React.PropTypes.string,
+  iconClass: React.PropTypes.string,
+  icon: React.PropTypes.element,
+  label: React.PropTypes.string,
+  disabled: React.PropTypes.bool,
+  defaultValue: React.PropTypes.string,
+  transitionEnterTimeout: React.PropTypes.number,
+  transitionLeaveTimeout: React.PropTypes.number,
+  options: React.PropTypes.array.isRequired,
+  onChange: React.PropTypes.func
+}

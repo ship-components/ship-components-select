@@ -43,8 +43,7 @@ class Examples extends React.Component {
           <Select
             defaultValue={this.state.example1 || opts.str[0]}
             options={opts.str}
-            iconPrefix='ion-'
-            icon='chevron-down'
+            icon={<span className='ion-chevron-down'/>}
             onChange={this.handleChange.bind(this, 'example1')} />
           <code>
             {`<Select
@@ -55,8 +54,7 @@ class Examples extends React.Component {
           <Select
             defaultValue={this.state.example2 || opts.obj[0].value}
             options={opts.obj}
-            iconPrefix='ion-'
-            icon='chevron-down'
+            icon={<span className='ion-chevron-down'/>}
             onChange={this.handleChange.bind(this, 'example2')}
           />
           <code>
@@ -83,8 +81,7 @@ class Examples extends React.Component {
             label='Select...'
             defaultValue={this.state.example3}
             options={opts.str}
-            iconPrefix='ion-'
-            icon='chevron-down'
+            icon={<span className='ion-chevron-down'/>}
             onChange={this.handleChange.bind(this, 'example3')} />
           <code>
             {`<Select
@@ -99,8 +96,7 @@ class Examples extends React.Component {
             disabled
             defaultValue={this.state.example4 || opts.str[0]}
             options={opts.str}
-            iconPrefix='ion-'
-            icon='chevron-down'
+            icon={<span className='ion-chevron-down'/>}
             onChange={this.handleChange.bind(this, 'example4')} />
           <code>
             {`<Select

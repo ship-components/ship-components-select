@@ -8,11 +8,12 @@
   width: calc($base-grid-size * 8px - 2px);
   line-height: calc($base-grid-size * 8px - 2px) !important;
   text-align: center;
-  font-size: 30px;
+  font-size: 20px;
   &:before {
     display: block;
     transition: 500ms all ease;
     transform: rotateZ(0);
+    line-height: calc($base-grid-size * 8px - 2px);
   }
 }
 
