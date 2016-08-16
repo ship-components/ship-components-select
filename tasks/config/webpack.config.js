@@ -16,9 +16,8 @@ module.exports = {
   },
 
   externals: {
-    'classnames': true,
-    'lodash': true,
-    'react': 'React',
+    classnames: true,
+    react: 'React',
     'react-dom': true,
     'ship-components-outsideclick': true,
     'ship-components-highlight-click': true,
@@ -37,6 +36,14 @@ module.exports = {
       {
         test: /\.(jsx?|es6)$/,
         exclude: /node_modules/,
+        loader: 'babel'
+      },
+      // ES6/JSX for App
+      {
+        test: /\.(jsx?|es6)$/,
+        include: [
+          /ship-components-.*\/src/
+        ],
         loader: 'babel'
       },
       // CSS Modules
