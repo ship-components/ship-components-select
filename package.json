@@ -1,16 +1,16 @@
 {
-  "name": "ship-components-select-box",
+  "name": "ship-components-select",
   "version": "0.1.0",
   "description": "Material Design React Select Box",
   "main": "src/Select.jsx",
   "scripts": {
     "start": "grunt server",
     "build": "grunt build",
-    "test": "jest src/ --coverage"
+    "test": "echo 'No tests defined'; exit 1; jest src/ --coverage"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ship-components/react-select.git"
+    "url": "git+https://github.com/ship-components/ship-components-select.git"
   },
   "keywords": [
     "react"
@@ -18,9 +18,9 @@
   "author": "Isaac Suttell <isaac@isaacsuttell.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ship-components/react-select/issues"
+    "url": "https://github.com/ship-components/ship-components-select/issues"
   },
-  "homepage": "https://github.com/ship-components/react-select#readme",
+  "homepage": "https://github.com/ship-components/ship-components-select#readme",
   "devDependencies": {
     "autoprefixer": "^6.1.0",
     "babel": "^6.0.15",
@@ -42,7 +42,7 @@
     "grunt-contrib-clean": "^0.6.0",
     "grunt-eslint": "^17.3.1",
     "grunt-webpack": "^1.0.11",
-    "lodash": "^3.10.1",
+    "jest-cli": "^14.1.0",
     "object-assign": "^4.0.1",
     "postcss-calc": "^5.0.0",
     "postcss-color-function": "^2.0.0",
@@ -53,8 +53,8 @@
     "react": ">=0.14.2",
     "react-addons-css-transition-group": ">=0.14.2",
     "react-dom": ">=0.14.2",
-    "react-highlight-click": "git+https://github.com/ship-components/react-highlight-click.git#master",
-    "react-outsideclick": "git+https://github.com/ship-components/react-outsideclick.git#master",
+    "ship-components-highlight-click": "^0.1.4",
+    "ship-components-outsideclick": "^0.1.1",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.6",
     "webpack-dev-server": "^1.12.1"

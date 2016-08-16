@@ -6,7 +6,7 @@
 .select--icon {
   height: 30px;
   width: 30px;
-  line-height: 30px !imporant;
+  line-height: 30px !important;
   text-align: center;
   font-size: 30px;
 }
@@ -16,13 +16,11 @@
   -webkit-transition: 500ms all ease;
   transition: 500ms all ease;
   -webkit-transform: rotateZ(0);
-      -ms-transform: rotate(0);
           transform: rotateZ(0);
 }
 
 .select--active .select--icon:before {
   -webkit-transform: rotateZ(180deg);
-      -ms-transform: rotate(180deg);
           transform: rotateZ(180deg);
 }
 
@@ -39,7 +37,6 @@
   font-size: 16px;
   border-bottom: 1px solid rgba(#000, 0.18);
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   cursor: pointer;
@@ -48,7 +45,6 @@
 
 .select--value {
   -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
   white-space: nowrap;
@@ -63,10 +59,11 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .select--item {
-  padding: 12px 24px;
+  padding: 8px 24px;
   white-space: nowrap;
   cursor: pointer;
   overflow: hidden;
@@ -75,13 +72,22 @@
 }
 
 .select--item.select--selected {
-  background-color: red;
+  background-color: #38b889;
   color: #fff;
 }
 
 .select--item:hover {
-  background-color: rgba(255, 0, 0, 0.66);
+  background-color: rgba(56, 184, 137, 0.66);
   color: #fff;
+}
+
+.select--disabled {
+  cusor: not-allowed;
+}
+
+.select--disabled .select--item,
+  .select--disabled .select--value {
+  opacity: 0.58;
 }
 
 .select--enter {  }

@@ -1,4 +1,4 @@
-# react-select
+# ship-components-select
 [React](http://facebook.github.io/react/) select box. Exports a commonjs module that can be used with [webpack](http://webpack.github.io/). Source is in ES6 and is compiled down to ES5 using [Babel](https://babeljs.io/).
 
 ## Usage
@@ -7,7 +7,7 @@
 The component is written using ES6/JSX therefore Babel is recommended to use it. The below example is based on using [webpack](http://webpack.github.io/) and [babel-loader](https://github.com/babel/babel-loader).
 ```js
 import React from 'react';
-import Select from 'react-select';
+import Select from 'ship-components-select';
 
 export default class ExampleClass extends React.Component {
   constructor(props) {

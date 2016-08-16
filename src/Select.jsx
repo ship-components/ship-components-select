@@ -12,8 +12,8 @@ import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 
 import SelectOption from './SelectOption';
-import OutsideClick from 'react-outsideclick';
-import HighlightClick from 'react-highlight-click';
+import OutsideClick from 'ship-components-outsideclick';
+import HighlightClick from 'ship-components-highlight-click';
 
 import dispatch from './dispatch';
 

@@ -20,8 +20,8 @@ module.exports = {
     'lodash': true,
     'react': 'React',
     'react-dom': true,
-    'react-outsideclick': true,
-    'react-highlight-click': true,
+    'ship-components-outsideclick': true,
+    'ship-components-highlight-click': true,
     'react-addons-css-transition-group': true
   },
 
