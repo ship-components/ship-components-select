@@ -103,7 +103,7 @@ Below are is a sample of how to setup the loaders:
 2. `npm test`
 
 ## History
-* 0.1.1 - Added className prop
+* 0.1.1 - Added className prop, fixed custom icon issue, added prop type checks
 * 0.1.0 - Initial
 
 ## License
