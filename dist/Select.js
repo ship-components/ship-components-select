@@ -128,7 +128,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function Select(props) {
 	    _classCallCheck(this, Select);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Select).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (Select.__proto__ || Object.getPrototypeOf(Select)).call(this, props));
 	
 	    _this.state = {
 	      active: false
@@ -265,7 +265,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	
 	      // css class names
-	      var containerClasses = (0, _classnames2.default)('select', _select2.default.container, (_classNames = {}, _defineProperty(_classNames, _select2.default.disabled, this.props.disabled), _defineProperty(_classNames, _select2.default.active, this.state.active), _classNames));
+	      var containerClasses = (0, _classnames2.default)('select', this.props.className, _select2.default.container, (_classNames = {}, _defineProperty(_classNames, _select2.default.disabled, this.props.disabled), _defineProperty(_classNames, _select2.default.active, this.state.active), _classNames));
 	
 	      return _react2.default.createElement(
 	        _shipComponentsOutsideclick2.default,
@@ -287,7 +287,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            { className: 'select--value ' + _select2.default.value },
 	            value.render || value.label
 	          ),
-	          this.props.icon !== null ? this.props.icon : _react2.default.createElement('div', { className: 'select--value-icon ' + this.props.iconClass + ' ' + _select2.default.icon })
+	          this.props.icon !== null ? _react2.default.cloneElement(this.props.icon, {
+	            className: this.props.icon.props.className + ' select--value-icon ' + _select2.default.icon
+	          }) : _react2.default.createElement('div', { className: 'select--value-icon ' + this.props.iconClass + ' ' + _select2.default.icon })
 	        ),
 	        _react2.default.createElement(
 	          _reactAddonsCssTransitionGroup2.default,
@@ -325,9 +327,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return Select;
 	}(_react2.default.Component);
 	
+	/**
+	 * Defaults
+	 * @type {Object}
+	 */
+	
+	
 	exports.default = Select;
-	
-	
 	Select.defaultProps = {
 	  iconClass: 'icon-keyboard_arrow_down',
 	  icon: null,
@@ -338,6 +344,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	  transitionLeaveTimeout: 1,
 	  options: [],
 	  onChange: function onChange() {}
+	};
+	
+	/**
+	 * Type checking
+	 * @type {Object}
+	 */
+	Select.propTypes = {
+	  className: _react2.default.PropTypes.string,
+	  iconClass: _react2.default.PropTypes.string,
+	  icon: _react2.default.PropTypes.element,
+	  label: _react2.default.PropTypes.string,
+	  disabled: _react2.default.PropTypes.bool,
+	  defaultValue: _react2.default.PropTypes.string,
+	  transitionEnterTimeout: _react2.default.PropTypes.number,
+	  transitionLeaveTimeout: _react2.default.PropTypes.number,
+	  options: _react2.default.PropTypes.array.isRequired,
+	  onChange: _react2.default.PropTypes.func
 	};
 
 /***/ },
@@ -406,7 +429,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function SelectOption() {
 	    _classCallCheck(this, SelectOption);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(SelectOption).apply(this, arguments));
+	    return _possibleConstructorReturn(this, (SelectOption.__proto__ || Object.getPrototypeOf(SelectOption)).apply(this, arguments));
 	  }
 	
 	  _createClass(SelectOption, [{

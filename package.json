@@ -2,7 +2,7 @@
   "name": "ship-components-select",
   "version": "0.1.1",
   "description": "Material Design React Select Box",
-  "main": "src/Select.jsx",
+  "main": "src/Select.js",
   "scripts": {
     "start": "grunt server",
     "build": "grunt build",

@@ -5,7 +5,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
   // Where to start
   entry: {
-    Select: path.resolve(__dirname, '../../src/Select.jsx')
+    Select: path.resolve(__dirname, '../../src/Select.js')
   },
 
   // Where to output
