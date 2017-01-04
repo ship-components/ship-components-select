@@ -225,7 +225,10 @@ Select.propTypes = {
   icon: React.PropTypes.element,
   label: React.PropTypes.string,
   disabled: React.PropTypes.bool,
-  defaultValue: React.PropTypes.string,
+  defaultValue: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.object
+  ]),
   transitionEnterTimeout: React.PropTypes.number,
   transitionLeaveTimeout: React.PropTypes.number,
   options: React.PropTypes.array.isRequired,
