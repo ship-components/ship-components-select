@@ -31,17 +31,6 @@ export default class Select extends React.Component {
     };
   }
 
-  getDefaultValue(props = this.props) {
-    if (typeof props.defaultValue === 'object') {
-      return props.defaultValue;
-    } else {
-      return {
-        value: props.defaultValue,
-        label: props.defaultValue
-      };
-    }
-  }
-
   /**
    * Update the state and parent data
    *
@@ -118,14 +107,17 @@ export default class Select extends React.Component {
     // Ensure it's an array of objects
     const opts = this.getOptions();
 
-    // Ensure it's an object
-    const defaultValue = this.getDefaultValue();
+    // Grab the current value from the list of options
+    let currentValue = opts.find(option => {
+      if (typeof this.props.value === 'object') {
+        return option.value === this.props.value.value;
+      } else {
+        return option.value === this.props.value
+      }
+    });
 
-    // Check to see if the defaultValue is in the option list
-    let value = opts.find(opt => opt.value === defaultValue.value);
-
-    if (!value) {
-      value = {
+    if (!currentValue) {
+      currentValue = {
         label: '',
         value: ''
       }
@@ -154,7 +146,7 @@ export default class Select extends React.Component {
         <HighlightClick
           className={'select--control ' + cssClassNames.control}
           onClick={this.toggleActive.bind(this)}>
-            <div className={'select--value ' + cssClassNames.value}>{value.render || value.label}</div>
+            <div className={'select--value ' + cssClassNames.value}>{currentValue.render || currentValue.label}</div>
             {this.props.icon !== null ?
               React.cloneElement(this.props.icon, {
                 className: this.props.icon.props.className + ' select--value-icon ' + cssClassNames.icon
@@ -174,7 +166,7 @@ export default class Select extends React.Component {
                 <SelectOption
                  {...option}
                  tag='li'
-                 selected={option.value === defaultValue.value}
+                 selected={option.value === currentValue.value}
                  onClick={this.handleClickItem.bind(this, option.value)}
                  key={option.key || option.value} />
               )
@@ -189,7 +181,7 @@ export default class Select extends React.Component {
            return (
              <SelectOption
                {...option}
-               selected={option.value === defaultValue.value}
+               selected={option.value === currentValue.value}
                key={option.key || option.value} />
            )
          })}

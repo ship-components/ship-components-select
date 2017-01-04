@@ -136,28 +136,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return _this;
 	  }
 	
+	  /**
+	   * Update the state and parent data
+	   *
+	   * @param     {Event}    event
+	   */
+	
+	
 	  _createClass(Select, [{
-	    key: 'getDefaultValue',
-	    value: function getDefaultValue() {
-	      var props = arguments.length <= 0 || arguments[0] === undefined ? this.props : arguments[0];
-	
-	      if (_typeof(props.defaultValue) === 'object') {
-	        return props.defaultValue;
-	      } else {
-	        return {
-	          value: props.defaultValue,
-	          label: props.defaultValue
-	        };
-	      }
-	    }
-	
-	    /**
-	     * Update the state and parent data
-	     *
-	     * @param     {Event}    event
-	     */
-	
-	  }, {
 	    key: 'handleChange',
 	    value: function handleChange(event) {
 	      this.updateState(event.target.value);
@@ -243,22 +229,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _classNames,
-	          _this3 = this;
+	      var _this3 = this,
+	          _classNames;
 	
 	      // Ensure it's an array of objects
 	      var opts = this.getOptions();
 	
-	      // Ensure it's an object
-	      var defaultValue = this.getDefaultValue();
-	
-	      // Check to see if the defaultValue is in the option list
-	      var value = opts.find(function (opt) {
-	        return opt.value === defaultValue.value;
+	      // Grab the current value from the list of options
+	      var currentValue = opts.find(function (option) {
+	        if (_typeof(_this3.props.value) === 'object') {
+	          return option.value === _this3.props.value.value;
+	        } else {
+	          return option.value === _this3.props.value;
+	        }
 	      });
 	
-	      if (!value) {
-	        value = {
+	      if (!currentValue) {
+	        currentValue = {
 	          label: '',
 	          value: ''
 	        };
@@ -285,7 +272,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'select--value ' + _select2.default.value },
-	            value.render || value.label
+	            currentValue.render || currentValue.label
 	          ),
 	          this.props.icon !== null ? _react2.default.cloneElement(this.props.icon, {
 	            className: this.props.icon.props.className + ' select--value-icon ' + _select2.default.icon
@@ -302,7 +289,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          (this.state.active ? opts : []).map(function (option) {
 	            return _react2.default.createElement(_SelectOption2.default, _extends({}, option, {
 	              tag: 'li',
-	              selected: option.value === defaultValue.value,
+	              selected: option.value === currentValue.value,
 	              onClick: _this3.handleClickItem.bind(_this3, option.value),
 	              key: option.key || option.value }));
 	          })
@@ -316,7 +303,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            style: { display: 'none' } },
 	          opts.map(function (option) {
 	            return _react2.default.createElement(_SelectOption2.default, _extends({}, option, {
-	              selected: option.value === defaultValue.value,
+	              selected: option.value === currentValue.value,
 	              key: option.key || option.value }));
 	          })
 	        )
@@ -356,7 +343,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  icon: _react2.default.PropTypes.element,
 	  label: _react2.default.PropTypes.string,
 	  disabled: _react2.default.PropTypes.bool,
-	  defaultValue: _react2.default.PropTypes.string,
+	  defaultValue: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.object]),
 	  transitionEnterTimeout: _react2.default.PropTypes.number,
 	  transitionLeaveTimeout: _react2.default.PropTypes.number,
 	  options: _react2.default.PropTypes.array.isRequired,
