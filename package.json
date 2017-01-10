@@ -1,6 +1,6 @@
 {
   "name": "ship-components-select",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Material Design React Select Box",
   "main": "src/Select.js",
   "scripts": {
