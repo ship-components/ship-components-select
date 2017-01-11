@@ -15,15 +15,27 @@ import cssClassNames from './select.css';
 export default class SelectOption extends React.Component {
 
   /**
+   * Performance Check
+   */
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.tag !== 'option' && nextProps.render) {
+      // Rendering a another component so we just skip
+      return true;
+    }
+    const keys = ['selected', 'label', 'value']
+    return keys.some(key => this.props[key] !== nextProps[key]);
+  }
+
+  /**
    * If we have a render option use that if we're not an <option>. Options only
    * support strings and numbers
    * @return {React}
    */
-  getContents() {
-    if (this.props.tag !== 'option' && this.props.render) {
-      return this.props.render;
+  getContents(props = this.props) {
+    if (props.tag !== 'option' && props.render) {
+      return props.render;
     } else {
-      return this.props.label || this.props.value;
+      return props.label || props.value;
     }
   }
 

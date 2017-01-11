@@ -19,6 +19,9 @@ import dispatch from './dispatch';
 import cssClassNames from './select.css';
 
 export default class Select extends React.Component {
+  /**
+   * Setup
+   */
   constructor(props) {
     super(props);
 
@@ -27,6 +30,26 @@ export default class Select extends React.Component {
     };
   }
 
+  /**
+   * Performance Check
+   */
+  shouldComponentUpdate(nextProps, nextState) {
+    const props = ['value', 'label', 'disabled'];
+    return props.some(key => this.props[key] !== nextProps[key]) ||
+      this.state.active !== nextState.active ||
+      this.props.options.length !== nextProps.options.length ||
+      this.props.options.some((opt, i) => {
+        if (typeof opt === 'object') {
+          return opt.value !== nextProps.options[i].value;
+        } else {
+          return opt !== nextProps.options[i];
+        }
+      })
+  }
+
+  /**
+   * Try to keep the selected comp in view
+   */
   componentDidUpdate(prevProps, prevState) {
     if (this.props.options.length > 5 && this.refs.selected && prevState.active === false && this.state.active === true) {
       this.refs.selected.scrollIntoView();
