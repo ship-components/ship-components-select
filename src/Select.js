@@ -72,9 +72,11 @@ export default class Select extends React.Component {
    * Toggle open
    */
   toggleActive() {
-    this.setState({
-      active: !this.state.active
-    });
+    if (!this.props.disabled) {
+      this.setState({
+        active: !this.state.active
+      });
+    }
   }
 
   handleOutsideClick() {
@@ -146,7 +148,9 @@ export default class Select extends React.Component {
         : null}
         <HighlightClick
           className={'select--control ' + cssClassNames.control}
-          onClick={this.toggleActive.bind(this)}>
+          onClick={this.toggleActive.bind(this)}
+          disabled={this.props.disabled}
+        >
             <div className={'select--value ' + cssClassNames.value}>{currentValue.render || currentValue.label}</div>
             {this.props.icon !== null ?
               React.cloneElement(this.props.icon, {
