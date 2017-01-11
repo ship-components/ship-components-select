@@ -28,6 +28,12 @@ export default class Select extends React.Component {
     };
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.refs.selected && prevState.active === false && this.state.active === true) {
+      this.refs.selected.scrollIntoView();
+    }
+  }
+
   /**
    * Update the state and parent data
    *
@@ -159,11 +165,13 @@ export default class Select extends React.Component {
           {(this.state.active ? opts : []).map((option) => {
             return (
               <SelectOption
-               {...option}
-               tag='li'
-               selected={option.value === currentValue.value}
-               onClick={this.handleClickItem.bind(this, option.value)}
-               key={option.key || option.value} />
+                {...option}
+                tag='li'
+                ref={option.value === currentValue.value ? 'selected' : void 0}
+                selected={option.value === currentValue.value}
+                onClick={this.handleClickItem.bind(this, option.value)}
+                key={option.key || option.value}
+              />
             )
           })}
         </ul>
@@ -195,11 +203,8 @@ Select.defaultProps = {
   icon: null,
   label: '',
   disabled: false,
-  defaultValue: '',
-  transitionEnterTimeout: 1,
-  transitionLeaveTimeout: 1,
-  options: [],
-  onChange: function() {}
+  value: '',
+  options: []
 };
 
 /**

@@ -28,6 +28,15 @@ export default class SelectOption extends React.Component {
   }
 
   /**
+   * Attempt to make this option visible. Called from parent
+   */
+  scrollIntoView() {
+    if (typeof this.refs.option.scrollIntoView === 'function') {
+      this.refs.option.scrollIntoView();
+    }
+  }
+
+  /**
    * Render
    *
    * @return    {React}
@@ -41,6 +50,7 @@ export default class SelectOption extends React.Component {
     );
     return (
       <this.props.tag
+        ref='option'
         className={classes}
         value={this.props.value}
         onClick={this.props.onClick}>
