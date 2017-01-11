@@ -220,8 +220,6 @@ Select.propTypes = {
     React.PropTypes.string,
     React.PropTypes.object
   ]),
-  transitionEnterTimeout: React.PropTypes.number,
-  transitionLeaveTimeout: React.PropTypes.number,
   options: React.PropTypes.array.isRequired,
   onChange: React.PropTypes.func
 }
