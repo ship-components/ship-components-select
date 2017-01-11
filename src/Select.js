@@ -8,7 +8,6 @@
 'use strict';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 
 import SelectOption from './SelectOption';
@@ -64,9 +63,8 @@ export default class Select extends React.Component {
       if (this.props.disabled === true) {
         return;
       }
-      let el = ReactDOM.findDOMNode(this.refs.input);
-      el.value = value;
-      dispatch(el, this.props.onChange);
+      this.refs.input.value = value;
+      dispatch(this.refs.input, this.props.onChange);
     });
   }
 
@@ -158,10 +156,7 @@ export default class Select extends React.Component {
               <div className={'select--value-icon ' + this.props.iconClass + ' ' + cssClassNames.icon} />
             }
         </HighlightClick>
-        <ul
-          className={classNames('select--list', cssClassNames.list)}
-          component='ul'
-        >
+        <ul className={classNames('select--list', cssClassNames.list)} >
           {(this.state.active ? opts : []).map((option) => {
             return (
               <SelectOption
