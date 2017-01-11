@@ -17,9 +17,6 @@ import HighlightClick from 'ship-components-highlight-click';
 
 import dispatch from './dispatch';
 
-// Lets animate it
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-
 import cssClassNames from './select.css';
 
 export default class Select extends React.Component {
@@ -155,23 +152,21 @@ export default class Select extends React.Component {
               <div className={'select--value-icon ' + this.props.iconClass + ' ' + cssClassNames.icon} />
             }
         </HighlightClick>
-        <ReactCSSTransitionGroup
+        <ul
           className={classNames('select--list', cssClassNames.list)}
-          transitionName={cssClassNames}
-          transitionEnterTimeout={this.props.transitionEnterTimeout}
-          transitionLeaveTimeout={this.props.transitionLeaveTimeout}
-          component='ul'>
-            {(this.state.active ? opts : []).map((option) => {
-              return (
-                <SelectOption
-                 {...option}
-                 tag='li'
-                 selected={option.value === currentValue.value}
-                 onClick={this.handleClickItem.bind(this, option.value)}
-                 key={option.key || option.value} />
-              )
-            })}
-        </ReactCSSTransitionGroup>
+          component='ul'
+        >
+          {(this.state.active ? opts : []).map((option) => {
+            return (
+              <SelectOption
+               {...option}
+               tag='li'
+               selected={option.value === currentValue.value}
+               onClick={this.handleClickItem.bind(this, option.value)}
+               key={option.key || option.value} />
+            )
+          })}
+        </ul>
         <select
           ref='input'
           readOnly

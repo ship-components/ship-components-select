@@ -80,10 +80,3 @@
     opacity: $opacity-disabled;
   }
 }
-
-.enter {  }
-.enterActive {  }
-.leave {  }
-.leaveActive {  }
-.appear {  }
-.appearActive {  }
