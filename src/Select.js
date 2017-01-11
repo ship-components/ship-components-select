@@ -28,7 +28,7 @@ export default class Select extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.refs.selected && prevState.active === false && this.state.active === true) {
+    if (this.props.options.length > 5 && this.refs.selected && prevState.active === false && this.state.active === true) {
       this.refs.selected.scrollIntoView();
     }
   }
