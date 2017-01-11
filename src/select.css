@@ -51,8 +51,11 @@
   background-color: #fff;
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 0 calc($base-grid-size * 2);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  max-height: calc(40px * 5);
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .item {
@@ -80,10 +83,3 @@
     opacity: $opacity-disabled;
   }
 }
-
-.enter {  }
-.enterActive {  }
-.leave {  }
-.leaveActive {  }
-.appear {  }
-.appearActive {  }

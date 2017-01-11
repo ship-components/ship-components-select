@@ -8,7 +8,6 @@
 'use strict';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 
 import SelectOption from './SelectOption';
@@ -17,18 +16,44 @@ import HighlightClick from 'ship-components-highlight-click';
 
 import dispatch from './dispatch';
 
-// Lets animate it
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-
 import cssClassNames from './select.css';
 
 export default class Select extends React.Component {
+  /**
+   * Setup
+   */
   constructor(props) {
     super(props);
 
     this.state = {
       active: false
     };
+  }
+
+  /**
+   * Performance Check
+   */
+  shouldComponentUpdate(nextProps, nextState) {
+    const props = ['value', 'label', 'disabled'];
+    return props.some(key => this.props[key] !== nextProps[key]) ||
+      this.state.active !== nextState.active ||
+      this.props.options.length !== nextProps.options.length ||
+      this.props.options.some((opt, i) => {
+        if (typeof opt === 'object') {
+          return opt.value !== nextProps.options[i].value;
+        } else {
+          return opt !== nextProps.options[i];
+        }
+      })
+  }
+
+  /**
+   * Try to keep the selected comp in view
+   */
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.options.length > 5 && this.refs.selected && prevState.active === false && this.state.active === true) {
+      this.refs.selected.scrollIntoView();
+    }
   }
 
   /**
@@ -61,9 +86,8 @@ export default class Select extends React.Component {
       if (this.props.disabled === true) {
         return;
       }
-      let el = ReactDOM.findDOMNode(this.refs.input);
-      el.value = value;
-      dispatch(el, this.props.onChange);
+      this.refs.input.value = value;
+      dispatch(this.refs.input, this.props.onChange);
     });
   }
 
@@ -71,9 +95,11 @@ export default class Select extends React.Component {
    * Toggle open
    */
   toggleActive() {
-    this.setState({
-      active: !this.state.active
-    });
+    if (!this.props.disabled) {
+      this.setState({
+        active: !this.state.active
+      });
+    }
   }
 
   handleOutsideClick() {
@@ -145,7 +171,9 @@ export default class Select extends React.Component {
         : null}
         <HighlightClick
           className={'select--control ' + cssClassNames.control}
-          onClick={this.toggleActive.bind(this)}>
+          onClick={this.toggleActive.bind(this)}
+          disabled={this.props.disabled}
+        >
             <div className={'select--value ' + cssClassNames.value}>{currentValue.render || currentValue.label}</div>
             {this.props.icon !== null ?
               React.cloneElement(this.props.icon, {
@@ -155,27 +183,24 @@ export default class Select extends React.Component {
               <div className={'select--value-icon ' + this.props.iconClass + ' ' + cssClassNames.icon} />
             }
         </HighlightClick>
-        <ReactCSSTransitionGroup
-          className={classNames('select--list', cssClassNames.list)}
-          transitionName={cssClassNames}
-          transitionEnterTimeout={this.props.transitionEnterTimeout}
-          transitionLeaveTimeout={this.props.transitionLeaveTimeout}
-          component='ul'>
-            {(this.state.active ? opts : []).map((option) => {
-              return (
-                <SelectOption
-                 {...option}
-                 tag='li'
-                 selected={option.value === currentValue.value}
-                 onClick={this.handleClickItem.bind(this, option.value)}
-                 key={option.key || option.value} />
-              )
-            })}
-        </ReactCSSTransitionGroup>
+        <ul className={classNames('select--list', cssClassNames.list)} >
+          {(this.state.active ? opts : []).map((option) => {
+            return (
+              <SelectOption
+                {...option}
+                tag='li'
+                ref={option.value === currentValue.value ? 'selected' : void 0}
+                selected={option.value === currentValue.value}
+                onClick={this.handleClickItem.bind(this, option.value)}
+                key={option.key || option.value}
+              />
+            )
+          })}
+        </ul>
         <select
           ref='input'
           readOnly
-          value={this.props.defaultValue}
+          value={this.props.value}
           style={{display : 'none'}}>
          {opts.map((option) => {
            return (
@@ -200,11 +225,8 @@ Select.defaultProps = {
   icon: null,
   label: '',
   disabled: false,
-  defaultValue: '',
-  transitionEnterTimeout: 1,
-  transitionLeaveTimeout: 1,
-  options: [],
-  onChange: function() {}
+  value: '',
+  options: []
 };
 
 /**
@@ -217,12 +239,10 @@ Select.propTypes = {
   icon: React.PropTypes.element,
   label: React.PropTypes.string,
   disabled: React.PropTypes.bool,
-  defaultValue: React.PropTypes.oneOfType([
+  value: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.object
   ]),
-  transitionEnterTimeout: React.PropTypes.number,
-  transitionLeaveTimeout: React.PropTypes.number,
   options: React.PropTypes.array.isRequired,
   onChange: React.PropTypes.func
 }
