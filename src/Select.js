@@ -178,7 +178,7 @@ export default class Select extends React.Component {
         <select
           ref='input'
           readOnly
-          value={this.props.defaultValue}
+          value={this.props.value}
           style={{display : 'none'}}>
          {opts.map((option) => {
            return (
@@ -217,7 +217,7 @@ Select.propTypes = {
   icon: React.PropTypes.element,
   label: React.PropTypes.string,
   disabled: React.PropTypes.bool,
-  defaultValue: React.PropTypes.oneOfType([
+  value: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.object
   ]),
