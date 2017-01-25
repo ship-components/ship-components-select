@@ -40,7 +40,7 @@ export default class Select extends React.Component {
       this.props.options.length !== nextProps.options.length ||
       this.props.options.some((opt, i) => {
         if (typeof opt === 'object') {
-          return opt.value !== nextProps.options[i].value;
+          return !!opt.render || opt.opt.value !== nextProps.options[i].value;
         } else {
           return opt !== nextProps.options[i];
         }
