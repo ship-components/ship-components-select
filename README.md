@@ -103,6 +103,7 @@ Below are is a sample of how to setup the loaders:
 2. `npm test`
 
 ## History
+* 0.2.1 - always update if option has a render field
 * 0.2.0 - Prevent list from showing when disabled, removed transition group, fixed dependency issue, updated to react 15, limited height of list on long lists, added shouldComponentUpdate
 * 0.1.3 - IE10+ fix
 * 0.1.2 - Switch prop name from defaultValue to value, fixed prop type check
