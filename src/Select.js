@@ -35,13 +35,13 @@ export default class Select extends React.Component {
       }
     };
 
-    this.handleScrollParent = this.handleScrollParent.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   componentDidMount() {
     if (this.props.scrollParentClass) {
       this.registerScrollParent(this.props.scrollParentClass)
-      window.addEventListener('resize', this.handleScrollParent);
+      window.addEventListener('resize', this.handleClose);
     }
   }
 
@@ -49,7 +49,7 @@ export default class Select extends React.Component {
     let ancestor = ReactDOM.findDOMNode(this.refs.list).parentNode;
     while (ancestor && ancestor !== document) {
       if (ancestor.classList.contains(parentClass)) {
-        ancestor.addEventListener('scroll', this.handleScrollParent);
+        ancestor.addEventListener('scroll', this.handleClose);
         this.scrollParent = ancestor;
         return;
       }
@@ -59,8 +59,8 @@ export default class Select extends React.Component {
 
   componentWillUnmount() {
     if (this.scrollParent) {
-      this.scrollParent.removeEventListener('scroll', this.handleScrollParent);
-      window.removeEventListener('resize', this.handleScrollParent)
+      this.scrollParent.removeEventListener('scroll', this.handleClose);
+      window.removeEventListener('resize', this.handleClose)
     }
   }
 
@@ -107,16 +107,11 @@ export default class Select extends React.Component {
     }
     return {
       fixedDropdownStyle: {
-        width: `${parent.offsetWidth}px`,
+        width: `${parent.offsetWidth}`,
         position: 'fixed',
-        top: `${(offsetTop - scrollParentTop) + parent.offsetHeight}px`
+        top: `${(offsetTop - scrollParentTop) + parent.offsetHeight}`
       }
     };
-  }
-
-  handleScrollParent() {
-    let state = Object.assign({}, this.getDropdownStyle(), {active: false});
-    this.setState(state);
   }
 
   fixedDropdownStyleChanged(nextStyle) {
@@ -170,9 +165,7 @@ export default class Select extends React.Component {
    */
   toggleActive() {
     if (!this.props.disabled) {
-      this.setState({
-        active: !this.state.active
-      });
+      this.setState(Object.assign({}, this.getDropdownStyle(), {active: !this.state.active}));
     }
   }
 
