@@ -8,6 +8,7 @@
 'use strict';
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 
 import SelectOption from './SelectOption';
@@ -26,8 +27,41 @@ export default class Select extends React.Component {
     super(props);
 
     this.state = {
-      active: false
+      active: false,
+      fixedDropdownStyle: {
+        top: 'inherit',
+        width: 'inherit',
+        position: 'fixed'
+      }
     };
+
+    this.handleScrollParent = this.handleScrollParent.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.scrollParentClass) {
+      this.registerScrollParent(this.props.scrollParentClass)
+      window.addEventListener('resize', this.handleScrollParent);
+    }
+  }
+
+  registerScrollParent(parentClass) {
+    let ancestor = ReactDOM.findDOMNode(this.refs.list).parentNode;
+    while (ancestor && ancestor !== document) {
+      if (ancestor.classList.contains(parentClass)) {
+        ancestor.addEventListener('scroll', this.handleScrollParent);
+        this.scrollParent = ancestor;
+        return;
+      }
+      ancestor = ancestor.parentNode;
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.scrollParent) {
+      this.scrollParent.removeEventListener('scroll', this.handleScrollParent);
+      window.removeEventListener('resize', this.handleScrollParent)
+    }
   }
 
   /**
@@ -37,6 +71,7 @@ export default class Select extends React.Component {
     const props = ['value', 'label', 'disabled'];
     return props.some(key => this.props[key] !== nextProps[key]) ||
       this.state.active !== nextState.active ||
+      this.fixedDropdownStyleChanged(nextState.fixedDropdownStyle) ||
       this.props.options.length !== nextProps.options.length ||
       this.props.options.some((opt, i) => {
         if (typeof opt === 'object') {
@@ -54,6 +89,45 @@ export default class Select extends React.Component {
     if (this.props.options.length > 5 && this.refs.selected && prevState.active === false && this.state.active === true) {
       this.refs.selected.scrollIntoView();
     }
+
+    // when showing drop down, update the positioning styles
+    if (this.props.scrollParentClass && !prevState.active && this.state.active) {
+      this.setState(this.getDropdownStyle());
+    }
+  }
+
+  getDropdownStyle() {
+    let parent = ReactDOM.findDOMNode(this.refs.parent);
+    let source = parent;
+    let offsetTop = 0;
+    let scrollParentTop = this.scrollParent.scrollTop;
+    while (source) {
+      offsetTop += source.offsetTop;
+      source = source.offsetParent;
+    }
+    return {
+      fixedDropdownStyle: {
+        width: `${parent.offsetWidth}px`,
+        position: 'fixed',
+        top: `${(offsetTop - scrollParentTop) + parent.offsetHeight}px`
+      }
+    };
+  }
+
+  handleScrollParent() {
+    let state = Object.assign({}, this.getDropdownStyle(), {active: false});
+    this.setState(state);
+  }
+
+  fixedDropdownStyleChanged(nextStyle) {
+    for (let key in this.state.fixedDropdownStyle) {
+      if (this.state.fixedDropdownStyle.hasOwnProperty(key)) {
+        if (this.state.fixedDropdownStyle[key] !== nextStyle[key]) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   /**
@@ -102,7 +176,7 @@ export default class Select extends React.Component {
     }
   }
 
-  handleOutsideClick() {
+  handleClose() {
     this.setState({
       active: false
     });
@@ -160,10 +234,13 @@ export default class Select extends React.Component {
       }
     );
 
+    let listStyle = this.props.scrollParentClass && this.state.active ? this.state.fixedDropdownStyle : {};
+
     return (
       <OutsideClick
+        ref='parent'
         className={containerClasses}
-        onClick={this.handleOutsideClick.bind(this)} >
+        onClick={this.handleClose.bind(this)} >
         {this.props.label.length > 0 ?
           <label className={cssClassNames.label}>
             {this.props.label}
@@ -183,7 +260,10 @@ export default class Select extends React.Component {
               <div className={'select--value-icon ' + this.props.iconClass + ' ' + cssClassNames.icon} />
             }
         </HighlightClick>
-        <ul className={classNames('select--list', cssClassNames.list)} >
+        <ul
+          ref='list'
+          className={classNames('select--list', cssClassNames.list)}
+          style={listStyle}>
           {(this.state.active ? opts : []).map((option) => {
             return (
               <SelectOption
@@ -226,7 +306,8 @@ Select.defaultProps = {
   label: '',
   disabled: false,
   value: '',
-  options: []
+  options: [],
+  scrollParentClass: false
 };
 
 /**
