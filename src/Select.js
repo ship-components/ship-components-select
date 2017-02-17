@@ -97,6 +97,12 @@ export default class Select extends React.Component {
   }
 
   getDropdownStyle() {
+    if (!this.scrollParent) {
+      if (!process.env.NODE_ENV !== "production") {
+        console.warn("<Select /> must have scrollParent to use getDropdownStyle()")
+      }
+      return;
+    }
     let parent = ReactDOM.findDOMNode(this.refs.parent);
     let source = parent;
     let offsetTop = 0;
@@ -107,9 +113,9 @@ export default class Select extends React.Component {
     }
     return {
       fixedDropdownStyle: {
-        width: `${parent.offsetWidth}`,
+        width: `${parent.offsetWidth}px`,
         position: 'fixed',
-        top: `${(offsetTop - scrollParentTop) + parent.offsetHeight}`
+        top: `${(offsetTop - scrollParentTop) + parent.offsetHeight}px`
       }
     };
   }
@@ -165,7 +171,7 @@ export default class Select extends React.Component {
    */
   toggleActive() {
     if (!this.props.disabled) {
-      this.setState(Object.assign({}, this.getDropdownStyle(), {active: !this.state.active}));
+      this.setState({active: !this.state.active});
     }
   }
 
