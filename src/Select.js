@@ -98,7 +98,7 @@ export default class Select extends React.Component {
 
   getDropdownStyle() {
     if (!this.scrollParent) {
-      if (!process.env.NODE_ENV !== "production") {
+      if (process.env.NODE_ENV !== "production") {
         console.warn("<Select /> must have scrollParent to use getDropdownStyle()")
       }
       return;
