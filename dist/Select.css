@@ -59,8 +59,11 @@
   background-color: #fff;
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 0 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  max-height: 200px;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .select--item {
@@ -90,12 +93,5 @@
   .select--disabled .select--value {
   opacity: 0.58;
 }
-
-.select--enter {  }
-.select--enterActive {  }
-.select--leave {  }
-.select--leaveActive {  }
-.select--appear {  }
-.select--appearActive {  }
 
 /*# sourceMappingURL=Select.css.map*/

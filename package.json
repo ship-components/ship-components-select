@@ -1,12 +1,14 @@
 {
   "name": "ship-components-select",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Material Design React Select Box",
   "main": "src/Select.js",
   "scripts": {
     "start": "grunt server",
     "build": "grunt build",
-    "test": "echo 'No tests defined'; exit 1; jest src/ --coverage"
+    "lint": "./node_modules/eslint/bin/eslint.js src/*.jsx",
+    "test": "grunt lint && ./node_modules/jest-cli/bin/jest.js --coverage",
+    "coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js -v"
   },
   "repository": {
     "type": "git",
@@ -23,6 +25,16 @@
     "url": "https://github.com/ship-components/ship-components-select/issues"
   },
   "homepage": "https://github.com/ship-components/ship-components-select#readme",
+  "contributors": [
+    {
+      "name": "Isaac Suttell",
+      "email": "isaac.suttell@sony.com"
+    },
+    {
+      "name": "Sepand Assadi",
+      "email": "sepand.assadi@sony.com"
+    }
+  ],
   "dependencies": {
     "classnames": ">=2",
     "react": ">=15.0.0",
@@ -35,6 +47,7 @@
     "babel": "^6.0.15",
     "babel-core": "^6.1.4",
     "babel-eslint": "^4.1.5",
+    "babel-jest": "^19.0.0",
     "babel-loader": "^6.1.0",
     "babel-plugin-transform-es2015-classes": "^6.9.0",
     "babel-plugin-transform-runtime": "^6.9.0",
@@ -47,10 +60,13 @@
     "eslint-plugin-react": "^3.8.0",
     "extract-text-webpack-plugin": "^0.9.1",
     "grunt": "^0.4.5",
+    "grunt-cli": "^1.2.0",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-eslint": "^17.3.1",
     "grunt-webpack": "^1.0.11",
-    "jest-cli": "^14.1.0",
+    "jest": "^19.0.2",
+    "jest-cli": "^19.0.2",
+    "jest-css-modules": "^1.1.0",
     "object-assign": "^4.0.1",
     "postcss-calc": "^5.0.0",
     "postcss-color-function": "^2.0.0",
@@ -58,26 +74,31 @@
     "postcss-loader": "^0.7.0",
     "postcss-nested": "^1.0.0",
     "postcss-simple-vars": "^1.1.0",
+    "react-addons-test-utils": "^15.4.2",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.6",
     "webpack-dev-server": "^1.12.1"
   },
   "jest": {
-    "scriptPreprocessor": "node_modules/babel-jest",
-    "testFileExtensions": [
-      "es6",
-      "jsx",
-      "js"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "json",
-      "es6"
-    ],
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "moduleNameMapper": {
+      "\\.(css)$": "<rootDir>/node_modules/jest-css-modules"
+    },
     "unmockedModulePathPatterns": [
-      "node_modules/react",
-      "node_modules/react-dom"
+      "<rootDir>/node_modules/classnames",
+      "<rootDir>/node_modules/react",
+      "<rootDir>/node_modules/fbjs",
+      "<rootDir>/node_modules/react-dom",
+      "<rootDir>/node_modules/react-addons-test-utils"
+    ]
+  },
+  "babelJest": {
+    "include": [
+      "src/**/*.@(js|jsx|es6)",
+      "node_modules/ship-components-highlight-click/src/**/*.@(js|jsx|es6)",
+      "node_modules/ship-components-outsideclick/src/**/*.@(js|jsx|es6)"
     ]
   }
 }

@@ -2,6 +2,10 @@
 [React](http://facebook.github.io/react/) select box. Exports a commonjs module that can be used with [webpack](http://webpack.github.io/). Source is in ES6 and is compiled down to ES5 using [Babel](https://babeljs.io/).
 
 [![npm](https://img.shields.io/npm/v/ship-components-select.svg?maxAge=2592000)](https://www.npmjs.com/package/ship-components-select)
+[![Build Status](http://img.shields.io/travis/ship-components/ship-components-select/master.svg?style=flat)](https://travis-ci.org/ship-components/ship-components-select)
+[![Coverage](http://img.shields.io/coveralls/ship-components/ship-components-select.svg?style=flat)](https://coveralls.io/github/ship-components/ship-components-select)
+[![dependencies](https://img.shields.io/david/ship-components/ship-components-select.svg?style=flat)](https://david-dm.org/ship-components/ship-components-select)
+[![devDependencies](https://img.shields.io/david/dev/ship-components/ship-components-select.svg?style=flat)](https://david-dm.org/ship-components/ship-components-select?type=dev)
 
 ## Usage
 
@@ -103,6 +107,7 @@ Below are is a sample of how to setup the loaders:
 2. `npm test`
 
 ## History
+* 0.4.0 - Updates dev dependencies, adds tests, setup Travis CI and coverage
 * 0.3.1 - scrollParent bug fix for 0.3
 * 0.3.0 - support for "hangovers" using fixed position dropdown lists
 * 0.2.1 - always update if option has a render field

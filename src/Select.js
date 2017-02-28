@@ -45,25 +45,6 @@ export default class Select extends React.Component {
     }
   }
 
-  registerScrollParent(parentClass) {
-    let ancestor = ReactDOM.findDOMNode(this.refs.list).parentNode;
-    while (ancestor && ancestor !== document) {
-      if (ancestor.classList.contains(parentClass)) {
-        ancestor.addEventListener('scroll', this.handleClose);
-        this.scrollParent = ancestor;
-        return;
-      }
-      ancestor = ancestor.parentNode;
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.scrollParent) {
-      this.scrollParent.removeEventListener('scroll', this.handleClose);
-      window.removeEventListener('resize', this.handleClose)
-    }
-  }
-
   /**
    * Performance Check
    */
@@ -92,14 +73,37 @@ export default class Select extends React.Component {
 
     // when showing drop down, update the positioning styles
     if (this.props.scrollParentClass && !prevState.active && this.state.active) {
-      this.setState(this.getDropdownStyle());
+      // Disables the eslint warning (no-did-update-set-state)
+      // Since we have an IF clause to prevents react from infinite loop
+      // More info: https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-did-update-set-state.md
+      this.setState(this.getDropdownStyle()); // eslint-disable-line
     }
   }
 
+  componentWillUnmount() {
+    if (this.scrollParent) {
+      this.scrollParent.removeEventListener('scroll', this.handleClose);
+      window.removeEventListener('resize', this.handleClose)
+    }
+  }
+
+  registerScrollParent(parentClass) {
+    let ancestor = ReactDOM.findDOMNode(this.refs.list).parentNode;
+    while (ancestor && ancestor !== document) {
+      if (ancestor.classList.contains(parentClass)) {
+        ancestor.addEventListener('scroll', this.handleClose);
+        this.scrollParent = ancestor;
+        return;
+      }
+      ancestor = ancestor.parentNode;
+    }
+  }
+
+
   getDropdownStyle() {
     if (!this.scrollParent) {
-      if (process.env.NODE_ENV !== "production") {
-        console.warn("<Select /> must have scrollParent to use getDropdownStyle()")
+      if (process.env.NODE_ENV !== 'production') {
+        console.warn('<Select /> must have scrollParent to use getDropdownStyle()')
       }
       return;
     }
