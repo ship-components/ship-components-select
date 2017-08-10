@@ -79,7 +79,7 @@ SelectOption.defaultProps = {
   label: '',
   tag: 'option',
   selected: false,
-  onClick: function onClick() {}
+  onClick: void 0
 };
 
 SelectOption.propTypes = {

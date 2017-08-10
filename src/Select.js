@@ -101,18 +101,6 @@ export default class Select extends React.Component {
     }
   }
 
-  getWindowHeight(source) {
-    let height;
-
-    while (source) {
-      if (source.offsetParent === null) {
-        height = source.offsetHeight;
-      }
-      source = source.offsetParent;
-    }
-    return height;
-  }
-
   getDropdownStyle() {
     if (!this.scrollParent) {
       if (process.env.NODE_ENV !== 'production') {
@@ -123,9 +111,9 @@ export default class Select extends React.Component {
     // <select> component
     let parent = ReactDOM.findDOMNode(this.refs.parent);
     // Dropdown <ul>
-    let dropdownList = ReactDOM.findDOMNode(this.refs.list);
+    let dropdownList = this.refs.list;
     // Browser window height
-    let windowHeight = this.getWindowHeight(parent);
+    let windowHeight = window.innerHeight;
     // Calculate the invisible height of dropdown list
     // more inf: https://stackoverflow.com/a/22675563/5244684
     let dropdownInvisibleHeight = dropdownList.scrollHeight - dropdownList.offsetHeight;
@@ -338,7 +326,7 @@ Select.defaultProps = {
   value: '',
   options: [],
   scrollParentClass: false,
-  onChange: function onChange() {}
+  onChange: void 0
 };
 
 /**
