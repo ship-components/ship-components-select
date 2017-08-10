@@ -99,6 +99,17 @@ export default class Select extends React.Component {
     }
   }
 
+  getWindowHeight(source) {
+    let height;
+
+    while (source) {
+      if (source.offsetParent === null) {
+        height = source.offsetHeight;
+      }
+      source = source.offsetParent;
+    }
+    return height;
+  }
 
   getDropdownStyle() {
     if (!this.scrollParent) {
@@ -107,19 +118,34 @@ export default class Select extends React.Component {
       }
       return;
     }
+    // <select> component
     let parent = ReactDOM.findDOMNode(this.refs.parent);
+    // Dropdown <ul>
+    let dropdownList = ReactDOM.findDOMNode(this.refs.list);
+    // Browser window height
+    let windowHeight = this.getWindowHeight(parent);
+    // Calculate the invisible height of dropdown list
+    // more inf: https://stackoverflow.com/a/22675563/5244684
+    let dropdownInvisibleHeight = dropdownList.scrollHeight - dropdownList.offsetHeight;
+
     let source = parent;
     let offsetTop = 0;
     let scrollParentTop = this.scrollParent.scrollTop;
+
     while (source) {
       offsetTop += source.offsetTop;
       source = source.offsetParent;
     }
+    // re-adjust the offset value if dropdown options are not visible inside the window
+    if (dropdownList.clientHeight + offsetTop > windowHeight) {
+      offsetTop += (windowHeight - (dropdownList.clientHeight + offsetTop) - dropdownInvisibleHeight);
+    }
+
     return {
       fixedDropdownStyle: {
         width: `${parent.offsetWidth}px`,
         position: 'fixed',
-        top: `${(offsetTop - scrollParentTop) + parent.offsetHeight}px`
+        top: `${(offsetTop - scrollParentTop)}px`
       }
     };
   }
