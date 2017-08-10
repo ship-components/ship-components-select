@@ -8,7 +8,7 @@ export default function dispatch(el, fn) {
   let customEvent = null;
 
   // Internet Explorer 6-11
-  if(/*@cc_on!@*/false || !!document.documentMode) {
+  if (/*@cc_on!@*/false || !!document.documentMode) {
     customEvent = document.createEvent('MouseEvent');
     customEvent.initMouseEvent('change',true,true,window,0,0,0,0,0,false,false,false,false,0,null);
   } else {
@@ -17,11 +17,11 @@ export default function dispatch(el, fn) {
   }
 
   // Calls parent change function with the custom event and the right target
-  let handler = function(ev) {
+  let handler = function handler(ev) {
     // Clean up
     el.removeEventListener('change', handler);
 
-    if (typeof fn === 'function'){
+    if (typeof fn === 'function') {
       // Call
       fn.call(ev, ev);
     }

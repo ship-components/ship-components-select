@@ -8,6 +8,7 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 
@@ -36,11 +37,12 @@ export default class Select extends React.Component {
     };
 
     this.handleClose = this.handleClose.bind(this);
+    this.handleToggleActive = this.handleToggleActive.bind(this);
   }
 
   componentDidMount() {
     if (this.props.scrollParentClass) {
-      this.registerScrollParent(this.props.scrollParentClass)
+      this.registerScrollParent(this.props.scrollParentClass);
       window.addEventListener('resize', this.handleClose);
     }
   }
@@ -60,7 +62,7 @@ export default class Select extends React.Component {
         } else {
           return opt !== nextProps.options[i];
         }
-      })
+      });
   }
 
   /**
@@ -83,7 +85,7 @@ export default class Select extends React.Component {
   componentWillUnmount() {
     if (this.scrollParent) {
       this.scrollParent.removeEventListener('scroll', this.handleClose);
-      window.removeEventListener('resize', this.handleClose)
+      window.removeEventListener('resize', this.handleClose);
     }
   }
 
@@ -114,7 +116,7 @@ export default class Select extends React.Component {
   getDropdownStyle() {
     if (!this.scrollParent) {
       if (process.env.NODE_ENV !== 'production') {
-        console.warn('<Select /> must have scrollParent to use getDropdownStyle()')
+        console.warn('<Select /> must have scrollParent to use getDropdownStyle()');
       }
       return;
     }
@@ -199,7 +201,7 @@ export default class Select extends React.Component {
   /**
    * Toggle open
    */
-  toggleActive() {
+  handleToggleActive() {
     if (!this.props.disabled) {
       this.setState({active: !this.state.active});
     }
@@ -216,12 +218,10 @@ export default class Select extends React.Component {
 
     // Ensure we always deal with an array of objects
     if (typeof this.props.options[0] === 'string') {
-      opts = this.props.options.map((opt)=>{
-        return {
-          label: opt,
-          value: opt
-        };
-      });
+      opts = this.props.options.map(opt => ({
+        label: opt,
+        value: opt
+      }));
     }
 
     return opts;
@@ -237,11 +237,11 @@ export default class Select extends React.Component {
     const opts = this.getOptions();
 
     // Grab the current value from the list of options
-    let currentValue = opts.find(option => {
+    let currentValue = opts.find((option) => {
       if (typeof this.props.value === 'object') {
         return option.value === this.props.value.value;
       } else {
-        return option.value === this.props.value
+        return option.value === this.props.value;
       }
     });
 
@@ -249,7 +249,7 @@ export default class Select extends React.Component {
       currentValue = {
         label: '',
         value: ''
-      }
+      };
     }
 
     // css class names
@@ -269,57 +269,57 @@ export default class Select extends React.Component {
       <OutsideClick
         ref='parent'
         className={containerClasses}
-        onClick={this.handleClose.bind(this)} >
+        onClick={this.handleClose}
+      >
         {this.props.label.length > 0 ?
           <label className={cssClassNames.label}>
             {this.props.label}
           </label>
-        : null}
+          : null}
         <HighlightClick
           className={'select--control ' + cssClassNames.control}
-          onClick={this.toggleActive.bind(this)}
+          onClick={this.handleToggleActive}
           disabled={this.props.disabled}
         >
-            <div className={'select--value ' + cssClassNames.value}>{currentValue.render || currentValue.label}</div>
-            {this.props.icon !== null ?
-              React.cloneElement(this.props.icon, {
-                className: this.props.icon.props.className + ' select--value-icon ' + cssClassNames.icon
-              })
+          <div className={'select--value ' + cssClassNames.value}>{currentValue.render || currentValue.label}</div>
+          {this.props.icon !== null ?
+            React.cloneElement(this.props.icon, {
+              className: this.props.icon.props.className + ' select--value-icon ' + cssClassNames.icon
+            })
             :
-              <div className={'select--value-icon ' + this.props.iconClass + ' ' + cssClassNames.icon} />
-            }
+            <div className={'select--value-icon ' + this.props.iconClass + ' ' + cssClassNames.icon} />
+          }
         </HighlightClick>
         <ul
           ref='list'
           className={classNames('select--list', cssClassNames.list)}
-          style={listStyle}>
-          {(this.state.active ? opts : []).map((option) => {
-            return (
-              <SelectOption
-                {...option}
-                tag='li'
-                ref={option.value === currentValue.value ? 'selected' : void 0}
-                selected={option.value === currentValue.value}
-                onClick={this.handleClickItem.bind(this, option.value)}
-                key={option.key || option.value}
-              />
-            )
-          })}
+          style={listStyle}
+        >
+          {(this.state.active ? opts : []).map(option => (
+            <SelectOption
+              {...option}
+              tag='li'
+              ref={option.value === currentValue.value ? 'selected' : void 0}
+              selected={option.value === currentValue.value}
+              onClick={this.handleClickItem.bind(this, option.value)} //eslint-disable-line
+              key={option.key || option.value}
+            />
+          ))}
         </ul>
         <select
           ref='input'
           readOnly
           value={this.props.value}
-          style={{display : 'none'}}>
-         {opts.map((option) => {
-           return (
-             <SelectOption
-               {...option}
-               selected={option.value === currentValue.value}
-               key={option.key || option.value} />
-           )
-         })}
-       </select>
+          style={{display : 'none'}}
+        >
+          {opts.map(option => (
+            <SelectOption
+              {...option}
+              selected={option.value === currentValue.value}
+              key={option.key || option.value}
+            />
+          ))}
+        </select>
       </OutsideClick>
     );
   }
@@ -331,12 +331,14 @@ export default class Select extends React.Component {
  */
 Select.defaultProps = {
   iconClass: 'icon-keyboard_arrow_down',
+  className: '',
   icon: null,
   label: '',
   disabled: false,
   value: '',
   options: [],
-  scrollParentClass: false
+  scrollParentClass: false,
+  onChange: function onChange() {}
 };
 
 /**
@@ -344,15 +346,16 @@ Select.defaultProps = {
  * @type {Object}
  */
 Select.propTypes = {
-  className: React.PropTypes.string,
-  iconClass: React.PropTypes.string,
-  icon: React.PropTypes.element,
-  label: React.PropTypes.string,
-  disabled: React.PropTypes.bool,
-  value: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.object
+  className: PropTypes.string,
+  iconClass: PropTypes.string,
+  icon: PropTypes.element,
+  label: PropTypes.string,
+  disabled: PropTypes.bool,
+  scrollParentClass: PropTypes.bool,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
   ]),
-  options: React.PropTypes.array.isRequired,
-  onChange: React.PropTypes.func
-}
+  options: PropTypes.array.isRequired,
+  onChange: PropTypes.func
+};
