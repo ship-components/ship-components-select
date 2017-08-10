@@ -107,6 +107,7 @@ Below are is a sample of how to setup the loaders:
 2. `npm test`
 
 ## History
+* 0.6.0 - Fixes the UI bug where dropdowns with long list of options are cutoff + Updates eslint module and dependencies.
 * 0.5.0 - Updates to the latest babel configurations (babel-preset-env).
 * 0.4.0 - Updates dev dependencies, adds tests, setup Travis CI and coverage
 * 0.3.1 - scrollParent bug fix for 0.3

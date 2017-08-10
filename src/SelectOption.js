@@ -8,6 +8,7 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import cssClassNames from './select.css';
@@ -22,7 +23,7 @@ export default class SelectOption extends React.Component {
       // Rendering a another component so we just skip
       return true;
     }
-    const keys = ['selected', 'label', 'value']
+    const keys = ['selected', 'label', 'value'];
     return keys.some(key => this.props[key] !== nextProps[key]);
   }
 
@@ -65,24 +66,27 @@ export default class SelectOption extends React.Component {
         ref='option'
         className={classes}
         value={this.props.value}
-        onClick={this.props.onClick}>
-          {this.getContents()}
+        onClick={this.props.onClick}
+      >
+        {this.getContents()}
       </this.props.tag>
     );
   }
 }
 
 SelectOption.defaultProps = {
+  className: '',
+  label: '',
   tag: 'option',
   selected: false,
-  onClick: function() {}
+  onClick: void 0
 };
 
 SelectOption.propTypes = {
-  className: React.PropTypes.string,
-  label: React.PropTypes.string,
-  value: React.PropTypes.string.isRequired,
-  tag: React.PropTypes.string,
-  onClick: React.PropTypes.func,
-  selected: React.PropTypes.bool
+  className: PropTypes.string,
+  label: PropTypes.string,
+  value: PropTypes.string.isRequired,
+  tag: PropTypes.string,
+  onClick: PropTypes.func,
+  selected: PropTypes.bool
 };
