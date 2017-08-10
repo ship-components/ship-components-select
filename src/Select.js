@@ -339,7 +339,10 @@ Select.propTypes = {
   icon: PropTypes.element,
   label: PropTypes.string,
   disabled: PropTypes.bool,
-  scrollParentClass: PropTypes.bool,
+  scrollParentClass: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string
+  ]),
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object
