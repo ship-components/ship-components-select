@@ -41,7 +41,7 @@ export default class Select extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.scrollParentClass) {
+    if (typeof this.props.scrollParentClass === 'string') {
       this.registerScrollParent(this.props.scrollParentClass);
       window.addEventListener('resize', this.handleClose);
     }
@@ -325,7 +325,7 @@ Select.defaultProps = {
   disabled: false,
   value: '',
   options: [],
-  scrollParentClass: false,
+  scrollParentClass: '',
   onChange: void 0
 };
 
@@ -339,7 +339,7 @@ Select.propTypes = {
   icon: PropTypes.element,
   label: PropTypes.string,
   disabled: PropTypes.bool,
-  scrollParentClass: PropTypes.bool,
+  scrollParentClass: PropTypes.string,
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object
