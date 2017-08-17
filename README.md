@@ -107,6 +107,8 @@ Below are is a sample of how to setup the loaders:
 2. `npm test`
 
 ## History
+* 0.6.2 - Refactor select component to calculate dropdowns visible heights correctly.
+* 0.6.1 - Fixes the proptype scrollParentClass in Select component.
 * 0.6.0 - Fixes the UI bug where dropdowns with long list of options are cutoff + Updates eslint module and dependencies.
 * 0.5.0 - Updates to the latest babel configurations (babel-preset-env).
 * 0.4.0 - Updates dev dependencies, adds tests, setup Travis CI and coverage
