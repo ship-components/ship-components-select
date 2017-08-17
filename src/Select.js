@@ -114,9 +114,6 @@ export default class Select extends React.Component {
     let dropdownList = this.refs.list;
     // Browser window height
     let windowHeight = window.innerHeight;
-    // Calculate the invisible height of dropdown list
-    // more inf: https://stackoverflow.com/a/22675563/5244684
-    let dropdownInvisibleHeight = dropdownList.scrollHeight - dropdownList.offsetHeight;
 
     let source = parent;
     let offsetTop = 0;
@@ -128,7 +125,8 @@ export default class Select extends React.Component {
     }
     // re-adjust the offset value if dropdown options are not visible inside the window
     if (dropdownList.clientHeight + offsetTop > windowHeight) {
-      offsetTop += (windowHeight - (dropdownList.clientHeight + offsetTop) - dropdownInvisibleHeight);
+      let offsetFromBottom = (dropdownList.clientHeight + offsetTop) - windowHeight;
+      offsetTop -= offsetFromBottom;
     }
 
     return {
