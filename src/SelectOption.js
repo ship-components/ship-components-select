@@ -41,11 +41,45 @@ export default class SelectOption extends React.Component {
   }
 
   /**
+   * Find out if dropdown is offscreen
+   * @param {object} el
+   * @returns {bool}
+   */
+  isElementOffScreen(el) {
+    // Get the ul element
+    const elParent = el.offsetParent;
+    const rect = elParent.getBoundingClientRect();
+
+    return (
+      rect.x + rect.width < 0
+      || rect.y + rect.height < 0
+      || (rect.x + elParent.clientWidth > window.innerWidth || rect.y + elParent.clientHeight > window.innerHeight)
+    );
+  }
+
+  /**
    * Attempt to make this option visible. Called from parent
    */
   scrollIntoView() {
-    if (typeof this.refs.option.scrollIntoView === 'function') {
-      this.refs.option.scrollIntoView();
+    const scrollIntoViewOptions = { behavior: 'smooth', block: 'end', inline: 'nearest' };
+    const isOffScreen = this.isElementOffScreen(this.refs.option);
+
+    // Both scrollIntoViewIfNeeded and scrollIntoView
+    // are not 100% supported.
+    // scrollIntoViewIfNeeded works with Chrome and Safari
+    // More info: https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoViewIfNeeded
+    if (typeof this.refs.option.scrollIntoViewIfNeeded === 'function') {
+      this.refs.option.scrollIntoViewIfNeeded();
+      return;
+    }
+
+    // scrollIntoView works with all other browsers
+    // if element isOffScreen then scrollIntoView will fire
+    // SHIPWATCH-1504
+    // More info: https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
+    if (isOffScreen && typeof this.refs.option.scrollIntoView === 'function') {
+      this.refs.option.scrollIntoView(false, scrollIntoViewOptions);
+      return;
     }
   }
 
