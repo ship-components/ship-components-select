@@ -31,15 +31,6 @@ describe('Select', () => {
        .not.toThrow();
   });
 
-  it('defines refs to input and list nodes', () => {
-    const wrapper = mount(
-      <Select options={options} />
-    );
-
-    expect(wrapper.ref('input')).toBeDefined();
-    expect(wrapper.ref('list')).toBeDefined();
-  });
-
   it('toggles "active" state', () => {
     const wrapper = mount(
       <Select options={options} />
@@ -93,30 +84,48 @@ describe('Select', () => {
 
   it('fires a change event once per update', () => {
     const changeHandler = jest.fn();
-
     const wrapper = mount(
-      <Select 
+      <Select
         options={options}
         onChange={changeHandler}
       />
     );
 
+    expect(changeHandler.mock.calls.length).toBe(0);
+    // trigger an update
     wrapper.node.updateState(options[0]);
-
-    expect(changeHandler).toHaveBeenCalled();
+    // verify the change handler is called once
     expect(changeHandler.mock.calls.length).toBe(1);
+  });
+
+  it('updates the underlying select input', () => {
+    const originalValue = options[0];
+    const updatedValue = options[2];
+    const wrapper = mount(
+      <Select
+        value={originalValue}
+        options={options}
+      />
+    );
+
+    // verify value is empty
+    expect(wrapper.ref('input').node.value).not.toBe(updatedValue);
+    // trigger value update
+    wrapper.node.updateState(updatedValue);
+    // verify the value
+    expect(wrapper.ref('input').node.value).toBe(updatedValue);
   });
 
   it('registers a scrolling parent', () => {
     const parentId = 'scrollingParent';
     const scrollingParentClass = 'scrolling-parent-test-class';
-    
+
     const wrapper = mount(
       <div
         id={parentId}
         className={scrollingParentClass}
       >
-        <Select 
+        <Select
           scrollParentClass={scrollingParentClass}
           options={options}
         />
