@@ -7,17 +7,13 @@ jest.setMock('ship-components-highlight-click', 'div');
 
 import React from 'react';
 import TestUtils from 'react-dom/test-utils';
-import { shallow, mount } from 'enzyme';
-import toJson from 'enzyme-to-json';
+import { mount } from 'enzyme';
+
+const Select = require('../Select').default;
+const SelectOption = require('../SelectOption').default;
 
 describe('Select', () => {
   let options = ['One', 'Two', 'Three'];
-  let Select;
-  let SelectOption;
-  beforeEach(() => {
-    Select = require('../Select').default;
-    SelectOption = require('../SelectOption').default;
-  });
 
   it('renders without error', () => {
     let element = React.createElement(
