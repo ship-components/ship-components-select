@@ -34,6 +34,10 @@
     {
       "name": "Sepand Assadi",
       "email": "sepand.assadi@sony.com"
+    },
+    {
+      "name": "Chris Orescan",
+      "email": "chris.orescan@sony.com"
     }
   ],
   "dependencies": {
@@ -56,6 +60,8 @@
     "babel-preset-react": "^6.1.4",
     "coveralls": "^2.13.0",
     "css-loader": "^0.22.0",
+    "enzyme": "^2.9.1",
+    "enzyme-to-json": "^2.0.0",
     "eslint": "^4.4.1",
     "eslint-config-ship-components": "^1.4.2",
     "eslint-loader": "^1.9.0",

@@ -16,7 +16,8 @@ import SelectOption from './SelectOption';
 import OutsideClick from 'ship-components-outsideclick';
 import HighlightClick from 'ship-components-highlight-click';
 
-import dispatch from './dispatch';
+import dispatch from './lib/dispatch';
+import scrollIntoView from './lib/scrollIntoView';
 
 import cssClassNames from './select.css';
 
@@ -70,7 +71,7 @@ export default class Select extends React.Component {
    */
   componentDidUpdate(prevProps, prevState) {
     if (this.props.options.length > 5 && this.refs.selected && prevState.active === false && this.state.active === true) {
-      this.refs.selected.scrollIntoView();
+      scrollIntoView(ReactDOM.findDOMNode(this.refs.selected));
     }
 
     // when showing drop down, update the positioning styles
@@ -213,6 +214,16 @@ export default class Select extends React.Component {
     return opts;
   }
 
+  getCurrentValue(opts) {
+    return opts.find((option) => {
+      if (typeof this.props.value === 'object') {
+        return option.value === this.props.value.value;
+      } else {
+        return option.value === this.props.value;
+      }
+    });
+  }
+
   /**
    * Render
    *
@@ -223,20 +234,7 @@ export default class Select extends React.Component {
     const opts = this.getOptions();
 
     // Grab the current value from the list of options
-    let currentValue = opts.find((option) => {
-      if (typeof this.props.value === 'object') {
-        return option.value === this.props.value.value;
-      } else {
-        return option.value === this.props.value;
-      }
-    });
-
-    if (!currentValue) {
-      currentValue = {
-        label: '',
-        value: ''
-      };
-    }
+    const currentValue = this.getCurrentValue(opts) || {};
 
     // css class names
     const containerClasses = classNames(
@@ -249,7 +247,7 @@ export default class Select extends React.Component {
       }
     );
 
-    let listStyle = this.props.scrollParentClass && this.state.active ? this.state.fixedDropdownStyle : {};
+    const listStyle = this.props.scrollParentClass && this.state.active ? this.state.fixedDropdownStyle : {};
 
     return (
       <OutsideClick
