@@ -9,11 +9,11 @@ export default function dispatch(el, fn) {
 
   // Internet Explorer 6-11
   if (/*@cc_on!@*/false || !!document.documentMode) {
-    customEvent = document.createEvent('MouseEvent');
+    customEvent = document.createEvent('Event');
     customEvent.initMouseEvent('change',true,true,window,0,0,0,0,0,false,false,false,false,0,null);
   } else {
     // Other browsers
-    customEvent = new window.MouseEvent('change');
+    customEvent = new Event('change');
   }
 
   // Calls parent change function with the custom event and the right target
