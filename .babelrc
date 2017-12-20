@@ -1,6 +1,6 @@
 {
-  "presets": ["react", ["env", {
-      "include": ["transform-es2015-classes"]
-    }]
+  "presets": [
+    "react",
+    "env"
   ]
 }
