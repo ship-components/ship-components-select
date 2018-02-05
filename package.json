@@ -1,6 +1,6 @@
 {
   "name": "ship-components-select",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Material Design React Select Box",
   "main": "src/Select.js",
   "scripts": {
@@ -8,8 +8,9 @@
     "build": "npm run test && grunt build",
     "lint": "./node_modules/eslint/bin/eslint.js src/*.jsx",
     "test": "grunt lint && ./node_modules/jest-cli/bin/jest.js --coverage",
+    "watch:tests": "NODE_ENV=test jest src --watch --coverage=false",
     "coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js -v",
-    "travis": "npm install -g trevor && trevor"
+    "travis": "npm install trevor && trevor"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,10 @@
     {
       "name": "Chris Orescan",
       "email": "chris.orescan@sony.com"
+    },
+    {
+      "name": "Jared Boone",
+      "email": "jared.boone@sony.com"
     }
   ],
   "dependencies": {
@@ -45,7 +50,8 @@
     "react": ">=15.6.2 <16",
     "react-dom": ">=15.6.2 <16",
     "ship-components-highlight-click": "^1.0.0",
-    "ship-components-outsideclick": "^1.0.0"
+    "ship-components-outsideclick": "^1.0.0",
+    "trevor": "^2.3.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.1.0",
@@ -58,7 +64,8 @@
     "babel-preset-react": "^6.24.1",
     "coveralls": "^2.13.0",
     "css-loader": "^0.22.0",
-    "enzyme": "^2.9.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-15": "^1.0.5",
     "enzyme-to-json": "^2.0.0",
     "eslint": "^4.4.1",
     "eslint-config-ship-components": "^1.5.1",

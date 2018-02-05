@@ -199,9 +199,15 @@ export default class Select extends React.Component {
   }
 
   handleClose() {
-    this.setState({
-      active: false
-    });
+    // Calling setState on an unmounted component will
+    // trigger a React warning....
+    // Checking the refs to make sure the component is mounted first
+    if (this.refs.input) {
+      this.setState({
+        active: false
+      });
+    }
+    return;
   }
 
   getOptions() {
