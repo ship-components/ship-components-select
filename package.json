@@ -8,6 +8,7 @@
     "build": "npm run test && grunt build",
     "lint": "./node_modules/eslint/bin/eslint.js src/*.jsx",
     "test": "grunt lint && ./node_modules/jest-cli/bin/jest.js --coverage",
+    "watch:tests": "NODE_ENV=test jest src --watch --coverage=false",
     "coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js -v",
     "travis": "npm install -g trevor && trevor"
   },

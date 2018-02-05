@@ -1,3 +1,4 @@
+
 jest.unmock('../Select');
 jest.unmock('../SelectOption.js');
 
@@ -59,8 +60,8 @@ describe('Select', () => {
   it('defines a ref to the selected option node', () => {
     // mount a Select with no value
     const wrapper = mount(
-      <Select 
-        options={options} 
+      <Select
+        options={options}
       />
     );
 
@@ -144,5 +145,17 @@ describe('Select', () => {
     let comp = TestUtils.findRenderedDOMComponentWithClass(reactTree, className);
 
     expect(comp).toBeDefined();
+  });
+
+  it('should class setState on mounted component in handleClose function', () => {
+    let className = 'testClass';
+    const wrapper = mount(
+      <Select
+        className={className}
+        options={itemsProps}
+      />
+    );
+    expect(wrapper).toBeDefined();
+    console.log(wrapper.instance());
   });
 });
