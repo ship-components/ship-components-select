@@ -18,14 +18,14 @@ describe('Select', () => {
 
   it('renders without error', () => {
     let element = React.createElement(
-       Select,
-       {
+      Select,
+      {
         options: options
-       }
+      }
     );
 
     expect(() => TestUtils.renderIntoDocument(element))
-       .not.toThrow();
+      .not.toThrow();
   });
 
   it('toggles "active" state', () => {

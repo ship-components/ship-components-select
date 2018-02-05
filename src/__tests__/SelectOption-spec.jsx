@@ -12,14 +12,14 @@ describe('SelectOption', () => {
   // Render without error
   it('should render without error', () => {
     let element = React.createElement(
-       SelectOption, // component class
-       {
+      SelectOption, // component class
+      {
         value: 'One'
-       } // props go here
+      } // props go here
     );
 
     expect(() => TestUtils.renderIntoDocument(element))
-       .not.toThrow();
+      .not.toThrow();
   });
 
   it('should support custom css classes', () => {
