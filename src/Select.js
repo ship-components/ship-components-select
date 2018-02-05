@@ -70,7 +70,7 @@ export default class Select extends React.Component {
    * Try to keep the selected comp in view
    */
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.options.length > 5 && this.refs.selected && prevState.active === false && this.state.active === true) {
+    if (this.shouldScrollToOption(prevState)) {
       scrollIntoView(ReactDOM.findDOMNode(this.refs.selected));
     }
 
@@ -88,6 +88,10 @@ export default class Select extends React.Component {
       this.scrollParent.removeEventListener('scroll', this.handleClose);
       window.removeEventListener('resize', this.handleClose);
     }
+  }
+
+  shouldScrollToOption(prevState) {
+    return this.props.options.length > 5 && this.refs.selected && prevState.active === false && this.state.active === true;
   }
 
   registerScrollParent(parentClass) {
@@ -224,6 +228,13 @@ export default class Select extends React.Component {
     });
   }
 
+  renderLabel() {
+    return this.props.label.length > 0 ?
+      <label className={cssClassNames.label}>
+        {this.props.label}
+      </label>
+      : null;
+  }
   /**
    * Render
    *
@@ -255,11 +266,7 @@ export default class Select extends React.Component {
         className={containerClasses}
         onClick={this.handleClose}
       >
-        {this.props.label.length > 0 ?
-          <label className={cssClassNames.label}>
-            {this.props.label}
-          </label>
-          : null}
+        {this.renderLabel()}
         <HighlightClick
           className={'select--control ' + cssClassNames.control}
           onClick={this.handleToggleActive}

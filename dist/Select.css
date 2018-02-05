@@ -13,7 +13,6 @@
 
 .select--icon:before {
   display: block;
-  -webkit-transition: 500ms all ease;
   transition: 500ms all ease;
   -webkit-transform: rotateZ(0);
           transform: rotateZ(0);
@@ -71,7 +70,6 @@
   white-space: nowrap;
   cursor: pointer;
   overflow: hidden;
-  -webkit-transition: 0.3s ease all;
   transition: 0.3s ease all;
 }
 
