@@ -1,6 +1,6 @@
 {
   "name": "ship-components-select",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Material Design React Select Box",
   "main": "src/Select.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "test": "grunt lint && ./node_modules/jest-cli/bin/jest.js --coverage",
     "watch:tests": "NODE_ENV=test jest src --watch --coverage=false",
     "coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js -v",
-    "travis": "npm install -g trevor && trevor"
+    "travis": "npm install trevor && trevor"
   },
   "repository": {
     "type": "git",
@@ -39,6 +39,10 @@
     {
       "name": "Chris Orescan",
       "email": "chris.orescan@sony.com"
+    },
+    {
+      "name": "Jared Boone",
+      "email": "jared.boone@sony.com"
     }
   ],
   "dependencies": {
@@ -46,7 +50,8 @@
     "react": ">=15.6.2 <16",
     "react-dom": ">=15.6.2 <16",
     "ship-components-highlight-click": "^1.0.0",
-    "ship-components-outsideclick": "^1.0.0"
+    "ship-components-outsideclick": "^1.0.0",
+    "trevor": "^2.3.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.1.0",

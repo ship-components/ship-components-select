@@ -107,6 +107,7 @@ Below are is a sample of how to setup the loaders:
 2. `npm test`
 
 ## History
+* 1.0.2 - Updates the Enzyme module as well as test suites to be compatible with Enzyme 3x. Also fixes the bug where handleClose function is running a setState on an unmounted component.
 * 0.6.4 - Added more testing.
 * 0.6.3 - Fixes the bug where opening a dropwdown causes the page to scroll. scrollIntoViewIfNeeded vs scrollIntoView based on the browser type.
 * 0.6.2 - Refactor select component to calculate dropdowns visible heights correctly.
