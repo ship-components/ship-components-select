@@ -29,7 +29,7 @@ function getContents(props) {
 export default class SelectOption extends React.Component {
 
   shouldComponentUpdate(nextProps) {
-    if (nextProps.tag !== 'option' && nextProps.render) {
+    if (nextProps.tag !== 'option' && nextProps.render) { // eslint-disable-line react/prop-types
       // Rendering a another component so we just skip
       return true;
     }
