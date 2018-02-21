@@ -50,8 +50,7 @@
     "react": ">=15.6.2 <16",
     "react-dom": ">=15.6.2 <16",
     "ship-components-highlight-click": "^1.0.0",
-    "ship-components-outsideclick": "^1.0.0",
-    "trevor": "^2.3.0"
+    "ship-components-outsideclick": "^1.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.1.0",
@@ -90,6 +89,7 @@
     "prop-types": "^15.5.10",
     "react-test-renderer": ">=15.6.2 <16",
     "style-loader": "^0.13.0",
+    "trevor": "^2.3.0",
     "webpack": "^1.12.6",
     "webpack-dev-server": "^1.12.1"
   },
