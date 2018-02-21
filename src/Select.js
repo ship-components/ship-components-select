@@ -52,8 +52,8 @@ export default class Select extends React.Component {
    * Performance Check
    */
   shouldComponentUpdate(nextProps, nextState) {
-    const props = ['value', 'label', 'disabled'];
-    return nextProps.forceUpdate || props.some(
+    const propsToCheck = ['value', 'label', 'disabled'];
+    return nextProps.forceUpdate || propsToCheck.some(
       key => this.props[key] !== nextProps[key]) ||
       this.state.active !== nextState.active ||
       this.fixedDropdownStyleChanged(nextState.fixedDropdownStyle) ||
@@ -333,6 +333,7 @@ Select.defaultProps = {
   icon: null,
   label: '',
   disabled: false,
+  forceUpdate: false,
   value: '',
   options: [],
   scrollParentClass: '',
@@ -349,6 +350,7 @@ Select.propTypes = {
   icon: PropTypes.element,
   label: PropTypes.string,
   disabled: PropTypes.bool,
+  forceUpdate: PropTypes.bool,
   scrollParentClass: PropTypes.string,
   value: PropTypes.oneOfType([
     PropTypes.string,
