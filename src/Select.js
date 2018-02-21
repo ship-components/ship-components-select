@@ -53,7 +53,8 @@ export default class Select extends React.Component {
    */
   shouldComponentUpdate(nextProps, nextState) {
     const props = ['value', 'label', 'disabled'];
-    return props.some(key => this.props[key] !== nextProps[key]) ||
+    return nextProps.forceUpdate || props.some(
+      key => this.props[key] !== nextProps[key]) ||
       this.state.active !== nextState.active ||
       this.fixedDropdownStyleChanged(nextState.fixedDropdownStyle) ||
       this.props.options.length !== nextProps.options.length ||
