@@ -107,6 +107,7 @@ Below are is a sample of how to setup the loaders:
 2. `npm test`
 
 ## History
+* 1.1.1 - Improved the shouldComponentUpdate functionality to check for props.label changes.
 * 1.1.0 - Added the forceUpdate prop to manually force update the render function from shouldComponentUpdate
 * 1.0.2 - Updates the Enzyme module as well as test suites to be compatible with Enzyme 3x. Also fixes the bug where handleClose function is running a setState on an unmounted component.
 * 0.6.4 - Added more testing.
