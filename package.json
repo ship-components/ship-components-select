@@ -47,8 +47,8 @@
   ],
   "dependencies": {
     "classnames": ">=2",
-    "react": ">=15.6.2 <16",
-    "react-dom": ">=15.6.2 <16",
+    "react": ">=15.6.2",
+    "react-dom": ">=15.6.2",
     "ship-components-highlight-click": "^1.0.0",
     "ship-components-outsideclick": "^1.0.0"
   },
@@ -87,7 +87,7 @@
     "postcss-nested": "^1.0.0",
     "postcss-simple-vars": "^1.1.0",
     "prop-types": "^15.5.10",
-    "react-test-renderer": ">=15.6.2 <16",
+    "react-test-renderer": ">=15.6.2",
     "style-loader": "^0.13.0",
     "trevor": "^2.3.0",
     "webpack": "^1.12.6",
