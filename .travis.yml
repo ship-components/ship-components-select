@@ -2,4 +2,8 @@ language: node_js
 node_js:
   - "8"
   - "6"
+env:
+  matrix:
+    - REACT=15
+    - REACT=16
 after_script: npm run coverage

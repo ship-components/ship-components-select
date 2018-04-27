@@ -7,11 +7,11 @@ jest.setMock('ship-components-highlight-click', 'div');
 
 import React from 'react';
 import TestUtils from 'react-dom/test-utils';
-import Enzyme, { mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
+import { mount } from 'enzyme';
+import configure from 'enzyme-adapter-react-helper';
 
-// Setup enzyme
-Enzyme.configure({ adapter: new Adapter() });
+// Setup Enzyme
+configure({});
 
 const Select = require('../Select').default;
 const SelectOption = require('../SelectOption').default;
