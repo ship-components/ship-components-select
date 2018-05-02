@@ -50,7 +50,7 @@
     "classnames": ">=2",
     "react": "^15.6.2 || ^16",
     "react-dom": "^15.6.2 || ^16",
-    "ship-components-highlight-click": "^1.0.0",
+    "ship-components-highlight-click": "^1.0.1",
     "ship-components-outsideclick": "^1.0.0"
   },
   "devDependencies": {
