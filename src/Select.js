@@ -42,8 +42,11 @@ export default class Select extends React.Component {
   }
 
   componentDidMount() {
-    if (typeof this.props.scrollParentClass === 'string') {
-      this.registerScrollParent(this.props.scrollParentClass);
+    const {
+      scrollParentClass
+    } = this.props;
+    if (typeof scrollParentClass === 'string' && scrollParentClass.length > 0) {
+      this.registerScrollParent(scrollParentClass);
       window.addEventListener('resize', this.handleClose);
     }
   }
@@ -100,6 +103,9 @@ export default class Select extends React.Component {
   }
 
   registerScrollParent(parentClass) {
+    if (typeof parentClass !== 'string' || parentClass.length === 0) {
+      throw new TypeError('parentClass is not a string or empty');
+    }
     let ancestor = ReactDOM.findDOMNode(this.refs.list).parentNode;
     while (ancestor && ancestor !== document) {
       if (ancestor.classList.contains(parentClass)) {
@@ -340,7 +346,7 @@ Select.defaultProps = {
   forceUpdate: false,
   value: '',
   options: [],
-  scrollParentClass: '',
+  scrollParentClass: undefined,
   onChange: void 0
 };
 

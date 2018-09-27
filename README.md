@@ -107,6 +107,7 @@ Below are is a sample of how to setup the loaders:
 2. `npm test`
 
 ## History
+* 1.1.3 - Fixed a bug with a missing parent scroll class. Removed `dist/` folder
 * 1.1.2 - Updated React dependencies (for React 16)
 * 1.1.1 - Improved the shouldComponentUpdate functionality to check for props.label changes.
 * 1.1.0 - Added the forceUpdate prop to manually force update the render function from shouldComponentUpdate
