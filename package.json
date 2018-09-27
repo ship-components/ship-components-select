@@ -105,7 +105,8 @@
       "<rootDir>/node_modules/react",
       "<rootDir>/node_modules/fbjs",
       "<rootDir>/node_modules/react-dom"
-    ]
+    ],
+    "testURL": "http://localhost"
   },
   "babelJest": {
     "include": [
