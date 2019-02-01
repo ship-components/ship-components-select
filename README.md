@@ -107,6 +107,8 @@ Below are is a sample of how to setup the loaders:
 2. `npm test`
 
 ## History
+
+* 1.1.5 - Fixed a calc bug from the lastest postcss
 * 1.1.4 - Updated dependencies (for security)
 * 1.1.3 - Fixed a bug with a missing parent scroll class. Removed `dist/` folder
 * 1.1.2 - Updated React dependencies (for React 16)
