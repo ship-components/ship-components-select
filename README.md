@@ -108,7 +108,7 @@ Below are is a sample of how to setup the loaders:
 
 ## History
 
-* 1.1.6 - Fixed a bug with dispatching events in IE11
+* 1.1.6 - Fixed a bug with dispatching events in IE11, deprecated Node 6
 * 1.1.5 - Fixed a calc bug from the lastest postcss
 * 1.1.4 - Updated dependencies (for security)
 * 1.1.3 - Fixed a bug with a missing parent scroll class. Removed `dist/` folder
