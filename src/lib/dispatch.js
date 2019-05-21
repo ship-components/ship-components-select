@@ -10,8 +10,11 @@ export default function dispatch(el, fn) {
   // Internet Explorer 6-11
   if (typeof (Event) !== 'function') {
     // CustomEvent polyfill for IE - https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
-    (function () {
-      if (typeof window.CustomEvent === "function") return false; //If not IE
+    // eslint-disable-next-line func-names
+    (function() {
+      if (typeof window.CustomEvent === 'function') {
+        return false; //If not IE
+      }
 
       function CustomEvent(event, params) {
         params = params || { bubbles: false, cancelable: false, detail: undefined };
