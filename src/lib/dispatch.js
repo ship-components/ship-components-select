@@ -8,9 +8,23 @@ export default function dispatch(el, fn) {
   let customEvent = null;
 
   // Internet Explorer 6-11
-  if (/*@cc_on!@*/false || !!document.documentMode) {
-    customEvent = document.createEvent('Event');
-    customEvent.initMouseEvent('change',true,true,window,0,0,0,0,0,false,false,false,false,0,null);
+  if (typeof (Event) !== 'function') {
+    // CustomEvent polyfill for IE - https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent
+    (function () {
+      if (typeof window.CustomEvent === "function") return false; //If not IE
+
+      function CustomEvent(event, params) {
+        params = params || { bubbles: false, cancelable: false, detail: undefined };
+        var evt = document.createEvent('CustomEvent');
+        evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+        return evt;
+      }
+
+      CustomEvent.prototype = window.Event.prototype;
+
+      window.CustomEvent = CustomEvent;
+    })();
+    customEvent = new CustomEvent('change', true, true);
   } else {
     // Other browsers
     customEvent = new Event('change');
