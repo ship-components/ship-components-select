@@ -7,6 +7,23 @@
 [![dependencies](https://img.shields.io/david/ship-components/ship-components-select.svg?style=flat)](https://david-dm.org/ship-components/ship-components-select)
 [![devDependencies](https://img.shields.io/david/dev/ship-components/ship-components-select.svg?style=flat)](https://david-dm.org/ship-components/ship-components-select?type=dev)
 
+## Getting started
+
+### Install dependencies and modules
+To get started, navigate to the root directory of the project and run the following command to install the packages with npm:
+
+```shell
+$ npm install
+```
+### Running
+After running the command above, run the following command in and navigate to http://localhost:8080.
+```shell
+$ npm run start
+```
+  
+Examples can be found in the `examples/` folder. 
+
+
 ## Usage
 
 ### ES6/JSX (Recommended)
@@ -41,16 +58,6 @@ export default class ExampleClass extends React.Component {
   }
 }
 ```
-
-## Examples and Development
-Examples can be found in the `examples/` folder. A development server can be run with:
-
-```shell
-$ npm install
-$ npm start
-```
-
-which will live reload any changes you make and serve them at http://localhost:8080.
 
 ### Webpack Configuration
 This module is designed to be used with webpack but requires a few loaders if you are pulling the source into another project.
@@ -94,10 +101,12 @@ Below are is a sample of how to setup the loaders:
     require('postcss-color-function'),
     require('postcss-calc'),
     require('autoprefixer')
-  ],
+  ],  
   [...]
 }
 ```
+
+## 
 
 ## Tests
 
