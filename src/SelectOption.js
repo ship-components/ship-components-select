@@ -14,22 +14,17 @@ import classNames from 'classnames';
 import cssClassNames from './select.css';
 
 /**
- * If we have a render option use that if we're not an <option>. Options only
- * support strings and numbers
+ * Render option content
  * @return {React}
  */
 function getContents(props) {
-  if (props.tag !== 'option' && props.render) {
-    return props.render;
-  } else {
-    return props.label || props.value;
-  }
+  return props.render || props.label || props.value;
 }
 
 export default class SelectOption extends React.Component {
 
   shouldComponentUpdate(nextProps) {
-    if (nextProps.tag !== 'option' && nextProps.render) { // eslint-disable-line react/prop-types
+    if (nextProps.render) {
       // Rendering a another component so we just skip
       return true;
     }
@@ -45,13 +40,13 @@ export default class SelectOption extends React.Component {
       }
     );
     return (
-      <this.props.tag
+      <li
         className={classes}
         value={this.props.value}
         onClick={this.props.onClick}
       >
         {getContents(this.props)}
-      </this.props.tag>
+      </li>
     );
   }
 }
@@ -59,7 +54,6 @@ export default class SelectOption extends React.Component {
 SelectOption.defaultProps = {
   className: '',
   label: '',
-  tag: 'option',
   selected: false,
   onClick: void 0
 };
@@ -67,8 +61,12 @@ SelectOption.defaultProps = {
 SelectOption.propTypes = {
   className: PropTypes.string,
   label: PropTypes.string,
+  render: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.string
+  ]),
   value: PropTypes.string.isRequired,
-  tag: PropTypes.string,
   onClick: PropTypes.func,
   selected: PropTypes.bool
 };
