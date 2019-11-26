@@ -54,6 +54,7 @@ export default class SelectOption extends React.Component {
 SelectOption.defaultProps = {
   className: '',
   label: '',
+  render: void 0,
   selected: false,
   onClick: void 0
 };
