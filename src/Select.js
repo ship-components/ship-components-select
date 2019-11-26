@@ -306,26 +306,26 @@ export default class Select extends React.Component {
           {(this.state.active ? opts : []).map(option => (
             <SelectOption
               {...option}
-              tag='li'
+              key={option.key || option.value}
               ref={option.value === currentValue.value ? 'selected' : void 0}
               selected={option.value === currentValue.value}
               onClick={this.handleClickItem.bind(this, option.value)} //eslint-disable-line
-              key={option.key || option.value}
             />
           ))}
         </ul>
         <select
           ref='input'
           readOnly
-          value={this.props.value}
+          value={currentValue.value}
           style={{display : 'none'}}
         >
           {opts.map(option => (
-            <SelectOption
-              {...option}
-              selected={option.value === currentValue.value}
+            <option
               key={option.key || option.value}
-            />
+              value={option.value}
+            >
+              {option.label || option.value}
+            </option>
           ))}
         </select>
       </OutsideClick>
